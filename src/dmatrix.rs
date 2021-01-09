@@ -1,5 +1,5 @@
-use crate::bindings::DMatrixHandle;
 use crate::errors::TreeRiteError;
+use crate::sys::DMatrixHandle;
 use crate::sys::{treelite_dmatrix_create_from_array, treelite_dmatrix_create_from_slice, treelite_dmatrix_free, treelite_dmatrix_get_dimension, FloatInfo};
 use fehler::throws;
 use ndarray::{AsArray, Ix2};

@@ -1,5 +1,5 @@
-use super::{get_last_error, DataType};
-use crate::bindings::{DMatrixHandle, TreeliteDMatrixCreateFromMat, TreeliteDMatrixFree, TreeliteDMatrixGetDimension};
+use super::bindings::{DMatrixHandle, TreeliteDMatrixCreateFromMat, TreeliteDMatrixFree, TreeliteDMatrixGetDimension};
+use super::{DataType, RetCodeCheck};
 use crate::errors::TreeRiteError;
 use fehler::{throw, throws};
 use libc::c_void;
@@ -11,10 +11,7 @@ use std::{f32, f64};
 
 #[throws(TreeRiteError)]
 pub fn treelite_dmatrix_free(handle: DMatrixHandle) {
-    let retcode = unsafe { TreeliteDMatrixFree(handle) };
-    if retcode != 0 {
-        throw!(get_last_error())
-    }
+    unsafe { TreeliteDMatrixFree(handle) }.check()?;
 }
 
 pub trait FloatInfo {
@@ -38,7 +35,7 @@ pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayV
         throw!(TreeRiteError::DataNotCContiguous);
     }
     let mut out = null_mut();
-    let retcode = unsafe {
+    unsafe {
         TreeliteDMatrixCreateFromMat(
             data.as_ptr() as *const c_void,
             Into::<&'static CStr>::into(F::DATA_TYPE).as_ptr(),
@@ -47,17 +44,15 @@ pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayV
             &F::MISSING as *const F as *const c_void,
             &mut out,
         )
-    };
-    if retcode != 0 {
-        throw!(get_last_error())
     }
+    .check()?;
     out
 }
 
 #[throws(TreeRiteError)]
 pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T]) -> DMatrixHandle {
     let mut out = null_mut();
-    let retcode = unsafe {
+    unsafe {
         TreeliteDMatrixCreateFromMat(
             data.as_ptr() as *const c_void,
             Into::<&'static CStr>::into(T::DATA_TYPE).as_ptr(),
@@ -66,10 +61,8 @@ pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T
             &T::MISSING as *const T as *const c_void,
             &mut out,
         )
-    };
-    if retcode != 0 {
-        throw!(get_last_error())
     }
+    .check()?;
     out
 }
 
@@ -100,9 +93,7 @@ pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T
 pub fn treelite_dmatrix_get_dimension(handle: DMatrixHandle) -> (u64, u64, u64) {
     let (mut nrow, mut ncol, mut nelem) = (0, 0, 0);
 
-    let retcode = unsafe { TreeliteDMatrixGetDimension(handle, &mut nrow, &mut ncol, &mut nelem) };
-    if retcode != 0 {
-        throw!(get_last_error())
-    }
+    unsafe { TreeliteDMatrixGetDimension(handle, &mut nrow, &mut ncol, &mut nelem) }.check()?;
+
     (nrow, ncol, nelem)
 }

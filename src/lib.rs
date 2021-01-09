@@ -1,4 +1,3 @@
-mod bindings;
 mod dmatrix;
 mod errors;
 mod predictor;

@@ -1,10 +1,9 @@
-use crate::bindings::PredictorHandle;
 use crate::dmatrix::DMatrix;
 use crate::errors::TreeRiteError;
 use crate::sys::{
     treelite_delete_predictor_output_vector, treelite_predictor_free, treelite_predictor_load, treelite_predictor_predict_batch, treelite_predictor_query_global_bias,
     treelite_predictor_query_leaf_output_type, treelite_predictor_query_num_class, treelite_predictor_query_num_feature, treelite_predictor_query_pred_transform,
-    treelite_predictor_query_result_size, treelite_predictor_query_sigmoid_alpha, treelite_predictor_query_threshold_type, DataType, FloatInfo,
+    treelite_predictor_query_result_size, treelite_predictor_query_sigmoid_alpha, treelite_predictor_query_threshold_type, DataType, FloatInfo, PredictorHandle,
 };
 use fehler::{throw, throws};
 use ndarray::{Array, Array2};
