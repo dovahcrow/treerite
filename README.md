@@ -18,3 +18,14 @@ set the dynamic feature of `treerite`.
 # Documentation
 
 There's no documentation available yet. But you can take a look at the example folder.
+
+# TODO
+
+- [ ] TreeliteRegisterLogCallback
+- [ ] TreeliteDMatrixCreateFromFile
+- [ ] TreeliteDMatrixCreateFromCSR
+- [ ] TreelitePredictorQueryNumFeature
+- [ ] TreelitePredictorQueryPredTransform
+- [ ] TreelitePredictorQuerySigmoidAlpha
+- [ ] TreelitePredictorQueryGlobalBias
+- [ ] TreelitePredictorQueryThresholdType
