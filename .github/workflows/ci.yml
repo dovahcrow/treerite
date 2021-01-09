@@ -1,0 +1,15 @@
+name: treerite CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - uses: icepuma/rust-action@master
+        with:
+          args: cargo test

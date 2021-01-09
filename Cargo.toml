@@ -1,0 +1,22 @@
+[package]
+name = "treerite"
+version = "0.1.0"
+authors = ["Weiyuan Wu <youngw@sfu.ca>"]
+edition = "2018"
+
+[features]
+default = [ "static", "free_panic" ]
+static = []
+dynamic = []
+free_panic = []
+
+[dependencies]
+fehler = "1"
+failure = "0.1"
+libc = "0.2"
+thiserror = "1"
+ndarray = "0.14"
+num-traits = "0.2"
+
+[build-dependencies]
+cmake = "0.1"
