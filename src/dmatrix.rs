@@ -1,6 +1,6 @@
 use crate::bindings::DMatrixHandle;
 use crate::errors::TreeRiteError;
-use crate::sys::{dmatrix_create_from_array, dmatrix_create_from_slice, dmatrix_free, dmatrix_get_dimension, FloatInfo};
+use crate::sys::{treelite_dmatrix_create_from_array, treelite_dmatrix_create_from_slice, treelite_dmatrix_free, treelite_dmatrix_get_dimension, FloatInfo};
 use fehler::throws;
 use ndarray::{AsArray, Ix2};
 use num_traits::Float;
@@ -25,7 +25,7 @@ where
         A: AsArray<'a, F, Ix2>,
         F: 'a,
     {
-        let handle = dmatrix_create_from_array(array.into())?;
+        let handle = treelite_dmatrix_create_from_array(array.into())?;
         DMatrix { handle, _phantom: PhantomData }
     }
 
@@ -38,12 +38,12 @@ where
 impl<F> DMatrix<F> {
     #[throws(TreeRiteError)]
     pub fn nrows(&self) -> u64 {
-        dmatrix_get_dimension(self.handle)?.0
+        treelite_dmatrix_get_dimension(self.handle)?.0
     }
 
     #[throws(TreeRiteError)]
     pub fn ncols(&self) -> u64 {
-        dmatrix_get_dimension(self.handle)?.1
+        treelite_dmatrix_get_dimension(self.handle)?.1
     }
 }
 
@@ -51,14 +51,14 @@ impl<'a, F: Float + FloatInfo> TryInto<DMatrix<F>> for &'a [F] {
     type Error = TreeRiteError;
 
     fn try_into(self) -> Result<DMatrix<F>, Self::Error> {
-        let handle = dmatrix_create_from_slice(self)?;
+        let handle = treelite_dmatrix_create_from_slice(self)?;
         Ok(DMatrix { handle, _phantom: PhantomData })
     }
 }
 
 impl<F> Drop for DMatrix<F> {
     fn drop(&mut self) {
-        match dmatrix_free(self.handle) {
+        match treelite_dmatrix_free(self.handle) {
             Ok(()) => {}
             Err(e) => {
                 if cfg!(feature = "free_panic") {

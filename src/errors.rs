@@ -13,6 +13,7 @@ pub enum TreeRiteError {
 
     #[error("Wrong predict output type, expect: {0}")]
     WrongPredictOutputType(DataType),
+
     #[error(transparent)]
     ShapeError(#[from] ndarray::ShapeError),
 

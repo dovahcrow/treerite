@@ -10,6 +10,7 @@ fn build_lib() {
     println!("cargo:rustc-link-search={}/lib", dst.display());
     println!("cargo:rustc-link-lib=static=treelite_runtime_static");
     println!("cargo:rustc-link-lib=stdc++");
+    println!("cargo:rustc-link-lib=gomp");
 }
 
 #[cfg(feature = "dynamic")]

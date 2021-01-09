@@ -1,9 +1,69 @@
 use ndarray::{array, Array2};
-use treerite::{DMatrix, Predictor};
+use treerite::{DMatrix, DataType, Predictor};
 
 #[test]
 fn load_model() {
     Predictor::load("examples/iris.so", 1).unwrap();
+}
+
+#[test]
+fn query_num_class() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    assert_eq!(model.num_class().unwrap(), 3);
+}
+
+#[test]
+fn query_result_size() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    let feats = array![
+        [5.5, 4.2, 1.4, 0.2],
+        [4.9, 3.1, 1.5, 0.2],
+        [5., 3.2, 1.2, 0.2],
+        [5.3, 3.7, 1.5, 0.2],
+        [5., 3.3, 1.4, 0.2],
+        [5.5, 2.3, 4., 1.3],
+        [6.5, 2.8, 4.6, 1.5]
+    ];
+    assert_eq!(
+        model.result_size(&DMatrix::from_2darray(&feats).unwrap()).unwrap(),
+        feats.nrows() as u64 * model.num_class().unwrap()
+    );
+}
+
+#[test]
+fn query_num_features() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    assert_eq!(model.num_feature().unwrap(), 4);
+}
+
+#[test]
+fn query_global_bias() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    assert_eq!(model.global_bias().unwrap(), 0.);
+}
+
+#[test]
+fn query_sigmod_alpha() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    assert_eq!(model.sigmod_alpha().unwrap(), 1.);
+}
+
+#[test]
+fn query_pred_transform() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    assert_eq!(model.pred_transform().unwrap(), "softmax");
+}
+
+#[test]
+fn query_threshold_type() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    assert_eq!(model.threshold_type().unwrap(), "float64");
+}
+
+#[test]
+fn query_leaf_output_type() {
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
+    assert_eq!(model.leaf_output_type().unwrap(), DataType::Float64);
 }
 
 #[test]

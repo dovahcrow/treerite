@@ -2,8 +2,9 @@ use crate::bindings::PredictorHandle;
 use crate::dmatrix::DMatrix;
 use crate::errors::TreeRiteError;
 use crate::sys::{
-    delete_predictor_output_vector, predictor_free, predictor_load, predictor_predict_batch, predictor_query_leaf_output_type, predictor_query_num_class,
-    predictor_query_result_size, DataType, FloatInfo,
+    treelite_delete_predictor_output_vector, treelite_predictor_free, treelite_predictor_load, treelite_predictor_predict_batch, treelite_predictor_query_global_bias,
+    treelite_predictor_query_leaf_output_type, treelite_predictor_query_num_class, treelite_predictor_query_num_feature, treelite_predictor_query_pred_transform,
+    treelite_predictor_query_result_size, treelite_predictor_query_sigmoid_alpha, treelite_predictor_query_threshold_type, DataType, FloatInfo,
 };
 use fehler::{throw, throws};
 use ndarray::{Array, Array2};
@@ -24,7 +25,7 @@ impl Predictor {
     where
         P: AsRef<Path>,
     {
-        let handle = predictor_load(library_path.as_ref(), num_worker_thread)?;
+        let handle = treelite_predictor_load(library_path.as_ref(), num_worker_thread)?;
         Predictor { handle }
     }
 
@@ -36,36 +37,62 @@ impl Predictor {
     {
         let dtype = self.leaf_output_type()?;
         let nclasses = self.num_class()?;
-        let (output, size) = predictor_predict_batch(self.handle, dmatrix.handle, verbose, pred_margin)?;
+        let (output, size) = treelite_predictor_predict_batch(self.handle, dmatrix.handle, verbose, pred_margin)?;
         if dtype != O::DATA_TYPE {
             throw!(TreeRiteError::WrongPredictOutputType(O::DATA_TYPE))
         }
         let data = unsafe { from_raw_parts(output as *mut O, size as usize) };
         let ret = Array::from_shape_vec((dmatrix.nrows()? as usize, nclasses as usize), data.to_vec())?;
 
-        delete_predictor_output_vector(self.handle, output)?;
+        treelite_delete_predictor_output_vector(self.handle, output)?;
 
         ret
     }
 
     #[throws(TreeRiteError)]
     pub fn leaf_output_type(&self) -> DataType {
-        predictor_query_leaf_output_type(self.handle)?
+        treelite_predictor_query_leaf_output_type(self.handle)?
     }
 
     #[throws(TreeRiteError)]
     pub fn num_class(&self) -> u64 {
-        predictor_query_num_class(self.handle)?
+        treelite_predictor_query_num_class(self.handle)?
     }
+
     #[throws(TreeRiteError)]
     pub fn result_size<F>(&self, batch: &DMatrix<F>) -> u64 {
-        predictor_query_result_size(self.handle, batch.handle)?
+        treelite_predictor_query_result_size(self.handle, batch.handle)?
+    }
+
+    #[throws(TreeRiteError)]
+    pub fn num_feature(&self) -> u64 {
+        treelite_predictor_query_num_feature(self.handle)?
+    }
+
+    #[throws(TreeRiteError)]
+    pub fn global_bias(&self) -> f32 {
+        treelite_predictor_query_global_bias(self.handle)?
+    }
+
+    #[throws(TreeRiteError)]
+    pub fn sigmod_alpha(&self) -> f32 {
+        treelite_predictor_query_sigmoid_alpha(self.handle)?
+    }
+
+    #[throws(TreeRiteError)]
+    pub fn pred_transform(&self) -> String {
+        treelite_predictor_query_pred_transform(self.handle)?
+    }
+
+    #[throws(TreeRiteError)]
+    pub fn threshold_type(&self) -> String {
+        treelite_predictor_query_threshold_type(self.handle)?
     }
 }
 
 impl Drop for Predictor {
     fn drop(&mut self) {
-        match predictor_free(self.handle) {
+        match treelite_predictor_free(self.handle) {
             Ok(()) => {}
             Err(e) => {
                 if cfg!(feature = "free_panic") {

@@ -17,15 +17,12 @@ set the dynamic feature of `treerite`.
 
 # Documentation
 
-There's no documentation available yet. But you can take a look at the example folder.
+There's no documentation available yet. But you can take a look at the example folder and the tests folder. 
+The usage should be quite straight forward: you first load the `Predictor` from a shared library of the model.
+Then, load the data from `Vec` or `ndarray::Array2` into `DMatrix`. Finally, you do prediction using
+`Predictor::predict_batch(dmatrix)`.
 
 # TODO
 
-- [ ] TreeliteRegisterLogCallback
-- [ ] TreeliteDMatrixCreateFromFile
 - [ ] TreeliteDMatrixCreateFromCSR
-- [ ] TreelitePredictorQueryNumFeature
-- [ ] TreelitePredictorQueryPredTransform
-- [ ] TreelitePredictorQuerySigmoidAlpha
-- [ ] TreelitePredictorQueryGlobalBias
-- [ ] TreelitePredictorQueryThresholdType
+- [ ] TreeliteDMatrixCreateFromFile

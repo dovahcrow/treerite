@@ -10,7 +10,7 @@ use std::ptr::null_mut;
 use std::{f32, f64};
 
 #[throws(TreeRiteError)]
-pub fn dmatrix_free(handle: DMatrixHandle) {
+pub fn treelite_dmatrix_free(handle: DMatrixHandle) {
     let retcode = unsafe { TreeliteDMatrixFree(handle) };
     if retcode != 0 {
         throw!(get_last_error())
@@ -33,7 +33,7 @@ impl FloatInfo for f32 {
 }
 
 #[throws(TreeRiteError)]
-pub fn dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayView<'a, F, Ix2>) -> DMatrixHandle {
+pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayView<'a, F, Ix2>) -> DMatrixHandle {
     if !data.is_standard_layout() {
         throw!(TreeRiteError::DataNotCContiguous);
     }
@@ -55,7 +55,7 @@ pub fn dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayView<'a, F
 }
 
 #[throws(TreeRiteError)]
-pub fn dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T]) -> DMatrixHandle {
+pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T]) -> DMatrixHandle {
     let mut out = null_mut();
     let retcode = unsafe {
         TreeliteDMatrixCreateFromMat(
@@ -73,8 +73,31 @@ pub fn dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T]) -> DMa
     out
 }
 
+// #[throws(TreeRiteError)]
+// pub fn treelite_dmatrix_create_from_file(path: &Path, format: Option<String>, data_type: DataType, nthread: usize, verbose: bool) -> DMatrixHandle {
+//     let format = format.unwrap_or_else(|| "libsvm".to_string());
+//     let format = CString::new(format)?;
+//     let path = CString::new(path.to_string_lossy().to_owned().to_string())?;
+//     let verbose = if verbose { 1 } else { 0 };
+//     let mut out = null_mut();
+//     let retcode = unsafe {
+//         TreeliteDMatrixCreateFromFile(
+//             path.as_ptr(),
+//             format.as_ptr(),
+//             Into::<&'static CStr>::into(data_type).as_ptr(),
+//             nthread as i32,
+//             verbose,
+//             &mut out,
+//         )
+//     };
+//     if retcode != 0 {
+//         throw!(get_last_error())
+//     }
+//     out
+// }
+
 #[throws(TreeRiteError)]
-pub fn dmatrix_get_dimension(handle: DMatrixHandle) -> (u64, u64, u64) {
+pub fn treelite_dmatrix_get_dimension(handle: DMatrixHandle) -> (u64, u64, u64) {
     let (mut nrow, mut ncol, mut nelem) = (0, 0, 0);
 
     let retcode = unsafe { TreeliteDMatrixGetDimension(handle, &mut nrow, &mut ncol, &mut nelem) };
