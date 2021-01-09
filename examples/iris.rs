@@ -5,7 +5,7 @@ use treerite::{DMatrix, Predictor};
 
 #[throws(Error)]
 fn main() {
-    let model = Predictor::load("examples/iris_model.so", 1).unwrap();
+    let model = Predictor::load("examples/iris.so", 1).unwrap();
 
     let feat: Vec<f64> = vec![7.7, 2.8, 6.7, 2.];
 

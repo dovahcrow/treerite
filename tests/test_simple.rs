@@ -3,12 +3,12 @@ use treerite::{DMatrix, Predictor};
 
 #[test]
 fn load_model() {
-    Predictor::load("examples/iris_model.so", 1).unwrap();
+    Predictor::load("examples/iris.so", 1).unwrap();
 }
 
 #[test]
 fn single_row_predict() {
-    let model = Predictor::load("examples/iris_model.so", 10).unwrap();
+    let model = Predictor::load("examples/iris.so", 10).unwrap();
 
     let feat = vec![5.4, 3.7, 1.5, 0.2];
 
@@ -19,7 +19,7 @@ fn single_row_predict() {
 
 #[test]
 fn multi_row_predict() {
-    let model = Predictor::load("examples/iris_model.so", 10).unwrap();
+    let model = Predictor::load("examples/iris.so", 10).unwrap();
 
     let feat = array![
         [5.5, 4.2, 1.4, 0.2],
