@@ -1,20 +1,20 @@
-use std::path::Path;
 fn main() {
     add_search_path();
     add_llvm_path();
-    let dst = cmake::Config::new("treelite").build();
-    link_lib(&dst);
+    build_lib();
 }
 
 #[cfg(feature = "static")]
-fn link_lib(dst: &Path) {
+fn build_lib() {
+    let dst = cmake::Config::new("treelite").define("BUILD_STATIC_LIBS", "ON").build();
     println!("cargo:rustc-link-search={}/lib", dst.display());
     println!("cargo:rustc-link-lib=static=treelite_runtime_static");
     println!("cargo:rustc-link-lib=stdc++");
 }
 
 #[cfg(feature = "dynamic")]
-fn link_lib(dst: &Path) {
+fn build_lib() {
+    let dst = cmake::Config::new("treelite").build();
     println!("cargo:rustc-link-search={}/lib", dst.display());
     println!("cargo:rustc-link-lib=dynamic=treelite_runtime");
 }
