@@ -20,3 +20,10 @@ num-traits = "0.2"
 
 [build-dependencies]
 cmake = "0.1"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "simple_bench"
+harness = false
