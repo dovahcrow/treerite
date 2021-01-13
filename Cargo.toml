@@ -16,7 +16,6 @@ free_panic = []
 
 [dependencies]
 fehler = "1"
-failure = "0.1"
 libc = "0.2"
 thiserror = "1"
 ndarray = "0.14"

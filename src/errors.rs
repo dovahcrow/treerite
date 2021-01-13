@@ -6,8 +6,10 @@ use thiserror::Error;
 pub enum TreeRiteError {
     #[error("Error: {0}")]
     CError(String),
+
     #[error("Unknown Data Type String: {0}")]
     UnknownDataTypeString(String),
+
     #[error(transparent)]
     NullError(#[from] NulError),
 

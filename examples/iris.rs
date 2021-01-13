@@ -1,9 +1,8 @@
-use failure::Error;
 use fehler::throws;
 use ndarray::Array2;
-use treerite::{DMatrix, Predictor};
+use treerite::{DMatrix, Predictor, TreeRiteError};
 
-#[throws(Error)]
+#[throws(TreeRiteError)]
 fn main() {
     let model = Predictor::load("examples/iris.so", 1).unwrap();
 
