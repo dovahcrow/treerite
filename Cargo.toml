@@ -3,6 +3,10 @@ name = "treerite"
 version = "0.1.0"
 authors = ["Weiyuan Wu <youngw@sfu.ca>"]
 edition = "2018"
+repository = "https://github.com/dovahcrow/treerite"
+readme = "README.md"
+license-file = "LICENSE"
+description = "Rust binding for treelite runtime (https://github.com/dmlc/treelite)"
 
 [features]
 default = [ "static", "free_panic" ]
