@@ -20,7 +20,7 @@ Then, load the data from `&[f64]` or `ndarray::Array2` into `DMatrix`. Finally, 
 # Documentation
 
 The documentation is hosted at [here](http://dovahcrow.github.io/treerite/treerite/). 
-You can also take a look at the [tests](tests) folder and the [examples](examples) folder.
+You can also take a look at the [tests](https://github.com/dovahcrow/treerite/tests) folder and the [examples](https://github.com/dovahcrow/treerite/examples) folder.
 
 # TODO
 
