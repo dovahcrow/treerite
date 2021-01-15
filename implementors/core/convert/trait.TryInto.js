@@ -1,3 +1,0 @@
-(function() {var implementors = {};
-implementors["treerite"] = [{"text":"impl&lt;'a, F:&nbsp;Float + FloatInfo&gt; TryInto&lt;DMatrix&lt;F&gt;&gt; for &amp;'a [F]","synthetic":false,"types":[]},{"text":"impl TryInto&lt;DataType&gt; for &amp;'static CStr","synthetic":false,"types":[]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

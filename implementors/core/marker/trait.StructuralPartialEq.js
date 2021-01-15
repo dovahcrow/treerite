@@ -1,7 +1,0 @@
-(function() {var implementors = {};
-implementors["ndarray"] = [{"text":"impl StructuralPartialEq for Slice","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for SliceOrIndex","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Axis","synthetic":false,"types":[]},{"text":"impl&lt;I:&nbsp;?Sized&gt; StructuralPartialEq for Dim&lt;I&gt;","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for IxDynImpl","synthetic":false,"types":[]}];
-implementors["num_complex"] = [{"text":"impl&lt;T&gt; StructuralPartialEq for Complex&lt;T&gt;","synthetic":false,"types":[]},{"text":"impl&lt;E&gt; StructuralPartialEq for ParseComplexError&lt;E&gt;","synthetic":false,"types":[]}];
-implementors["num_integer"] = [{"text":"impl&lt;A&gt; StructuralPartialEq for ExtendedGcd&lt;A&gt;","synthetic":false,"types":[]}];
-implementors["proc_macro2"] = [{"text":"impl StructuralPartialEq for Delimiter","synthetic":false,"types":[]},{"text":"impl StructuralPartialEq for Spacing","synthetic":false,"types":[]}];
-implementors["treerite"] = [{"text":"impl StructuralPartialEq for DataType","synthetic":false,"types":[]}];
-if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
