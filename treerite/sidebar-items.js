@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["DataType",""],["TreeRiteError",""]],"fn":[["treelite_register_log_callback",""]],"struct":[["DMatrix","Data matrix used in Treerite."],["Predictor","Loader for compiled shared libraries."]],"trait":[["FloatInfo",""]]});
