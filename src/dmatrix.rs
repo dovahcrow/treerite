@@ -7,6 +7,7 @@ use num_traits::Float;
 use std::convert::TryInto;
 use std::marker::PhantomData;
 
+/// Data matrix used in Treerite.
 pub struct DMatrix<F> {
     pub(crate) handle: DMatrixHandle,
     _phantom: PhantomData<F>,
@@ -19,6 +20,7 @@ impl<F> DMatrix<F>
 where
     F: Float + FloatInfo,
 {
+    /// Create a DMatrix from any type that can be converted to a 2d ndarray::ArrayView. This function is zero copy.
     #[throws(TreeRiteError)]
     pub fn from_2darray<'a, A>(array: A) -> DMatrix<F>
     where
@@ -29,6 +31,8 @@ where
         DMatrix { handle, _phantom: PhantomData }
     }
 
+    /// Create a single row DMatrix from a slice of floats. Useful for prediction for a single instance.
+    /// This function is zero copy.
     #[throws(TreeRiteError)]
     pub fn from_slice<'a>(array: &'a [F]) -> DMatrix<F> {
         array.try_into()?
@@ -36,11 +40,13 @@ where
 }
 
 impl<F> DMatrix<F> {
+    /// Number of rows in this DMatrix
     #[throws(TreeRiteError)]
     pub fn nrows(&self) -> u64 {
         treelite_dmatrix_get_dimension(self.handle)?.0
     }
 
+    /// Number of columns in this DMatrix
     #[throws(TreeRiteError)]
     pub fn ncols(&self) -> u64 {
         treelite_dmatrix_get_dimension(self.handle)?.1
