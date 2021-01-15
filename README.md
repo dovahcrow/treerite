@@ -1,4 +1,4 @@
-# TreeRite: [TreeLite](https://github.com/dmlc/treelite) runtime in Rust ![CI](https://github.com/dovahcrow/treerite/workflows/treerite%20CI/badge.svg)
+# TreeRite: [TreeLite](https://github.com/dmlc/treelite) runtime in Rust ![CI](https://github.com/dovahcrow/treerite/workflows/CI/badge.svg)
 
 This binding currently works for treelite 1.0.0
 

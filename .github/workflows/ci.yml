@@ -1,4 +1,4 @@
-name: treerite CI
+name: CI
 
 on: [push]
 
