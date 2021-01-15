@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["ndarray"] = [{"text":"impl&lt;T, D&gt; AsRef&lt;[SliceOrIndex]&gt; for SliceInfo&lt;T, D&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: AsRef&lt;[SliceOrIndex]&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;D: Dimension,&nbsp;</span>","synthetic":false,"types":[]},{"text":"impl&lt;T, D&gt; AsRef&lt;SliceInfo&lt;[SliceOrIndex], D&gt;&gt; for SliceInfo&lt;T, D&gt; <span class=\"where fmt-newline\">where<br>&nbsp;&nbsp;&nbsp;&nbsp;T: AsRef&lt;[SliceOrIndex]&gt;,<br>&nbsp;&nbsp;&nbsp;&nbsp;D: Dimension,&nbsp;</span>","synthetic":false,"types":[]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
