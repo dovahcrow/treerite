@@ -162,12 +162,25 @@ pub struct __fsid_t {
 }
 #[test]
 fn bindgen_test_layout___fsid_t() {
-    assert_eq!(::std::mem::size_of::<__fsid_t>(), 8usize, concat!("Size of: ", stringify!(__fsid_t)));
-    assert_eq!(::std::mem::align_of::<__fsid_t>(), 4usize, concat!("Alignment of ", stringify!(__fsid_t)));
+    assert_eq!(
+        ::std::mem::size_of::<__fsid_t>(),
+        8usize,
+        concat!("Size of: ", stringify!(__fsid_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__fsid_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(__fsid_t))
+    );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__fsid_t>())).__val as *const _ as usize },
         0usize,
-        concat!("Offset of field: ", stringify!(__fsid_t), "::", stringify!(__val))
+        concat!(
+            "Offset of field: ",
+            stringify!(__fsid_t),
+            "::",
+            stringify!(__val)
+        )
     );
 }
 pub type __clock_t = ::std::os::raw::c_long;
@@ -225,27 +238,57 @@ fn bindgen_test_layout___mbstate_t__bindgen_ty_1() {
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__mbstate_t__bindgen_ty_1>())).__wch as *const _ as usize },
         0usize,
-        concat!("Offset of field: ", stringify!(__mbstate_t__bindgen_ty_1), "::", stringify!(__wch))
+        concat!(
+            "Offset of field: ",
+            stringify!(__mbstate_t__bindgen_ty_1),
+            "::",
+            stringify!(__wch)
+        )
     );
     assert_eq!(
-        unsafe { &(*(::std::ptr::null::<__mbstate_t__bindgen_ty_1>())).__wchb as *const _ as usize },
+        unsafe {
+            &(*(::std::ptr::null::<__mbstate_t__bindgen_ty_1>())).__wchb as *const _ as usize
+        },
         0usize,
-        concat!("Offset of field: ", stringify!(__mbstate_t__bindgen_ty_1), "::", stringify!(__wchb))
+        concat!(
+            "Offset of field: ",
+            stringify!(__mbstate_t__bindgen_ty_1),
+            "::",
+            stringify!(__wchb)
+        )
     );
 }
 #[test]
 fn bindgen_test_layout___mbstate_t() {
-    assert_eq!(::std::mem::size_of::<__mbstate_t>(), 8usize, concat!("Size of: ", stringify!(__mbstate_t)));
-    assert_eq!(::std::mem::align_of::<__mbstate_t>(), 4usize, concat!("Alignment of ", stringify!(__mbstate_t)));
+    assert_eq!(
+        ::std::mem::size_of::<__mbstate_t>(),
+        8usize,
+        concat!("Size of: ", stringify!(__mbstate_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__mbstate_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(__mbstate_t))
+    );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__mbstate_t>())).__count as *const _ as usize },
         0usize,
-        concat!("Offset of field: ", stringify!(__mbstate_t), "::", stringify!(__count))
+        concat!(
+            "Offset of field: ",
+            stringify!(__mbstate_t),
+            "::",
+            stringify!(__count)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__mbstate_t>())).__value as *const _ as usize },
         4usize,
-        concat!("Offset of field: ", stringify!(__mbstate_t), "::", stringify!(__value))
+        concat!(
+            "Offset of field: ",
+            stringify!(__mbstate_t),
+            "::",
+            stringify!(__value)
+        )
     );
 }
 #[repr(C)]
@@ -256,17 +299,35 @@ pub struct _G_fpos_t {
 }
 #[test]
 fn bindgen_test_layout__G_fpos_t() {
-    assert_eq!(::std::mem::size_of::<_G_fpos_t>(), 16usize, concat!("Size of: ", stringify!(_G_fpos_t)));
-    assert_eq!(::std::mem::align_of::<_G_fpos_t>(), 8usize, concat!("Alignment of ", stringify!(_G_fpos_t)));
+    assert_eq!(
+        ::std::mem::size_of::<_G_fpos_t>(),
+        16usize,
+        concat!("Size of: ", stringify!(_G_fpos_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_G_fpos_t>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_G_fpos_t))
+    );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_G_fpos_t>())).__pos as *const _ as usize },
         0usize,
-        concat!("Offset of field: ", stringify!(_G_fpos_t), "::", stringify!(__pos))
+        concat!(
+            "Offset of field: ",
+            stringify!(_G_fpos_t),
+            "::",
+            stringify!(__pos)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_G_fpos_t>())).__state as *const _ as usize },
         8usize,
-        concat!("Offset of field: ", stringify!(_G_fpos_t), "::", stringify!(__state))
+        concat!(
+            "Offset of field: ",
+            stringify!(_G_fpos_t),
+            "::",
+            stringify!(__state)
+        )
     );
 }
 pub type __fpos_t = _G_fpos_t;
@@ -278,17 +339,35 @@ pub struct _G_fpos64_t {
 }
 #[test]
 fn bindgen_test_layout__G_fpos64_t() {
-    assert_eq!(::std::mem::size_of::<_G_fpos64_t>(), 16usize, concat!("Size of: ", stringify!(_G_fpos64_t)));
-    assert_eq!(::std::mem::align_of::<_G_fpos64_t>(), 8usize, concat!("Alignment of ", stringify!(_G_fpos64_t)));
+    assert_eq!(
+        ::std::mem::size_of::<_G_fpos64_t>(),
+        16usize,
+        concat!("Size of: ", stringify!(_G_fpos64_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_G_fpos64_t>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_G_fpos64_t))
+    );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_G_fpos64_t>())).__pos as *const _ as usize },
         0usize,
-        concat!("Offset of field: ", stringify!(_G_fpos64_t), "::", stringify!(__pos))
+        concat!(
+            "Offset of field: ",
+            stringify!(_G_fpos64_t),
+            "::",
+            stringify!(__pos)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_G_fpos64_t>())).__state as *const _ as usize },
         8usize,
-        concat!("Offset of field: ", stringify!(_G_fpos64_t), "::", stringify!(__state))
+        concat!(
+            "Offset of field: ",
+            stringify!(_G_fpos64_t),
+            "::",
+            stringify!(__state)
+        )
     );
 }
 pub type __fpos64_t = _G_fpos64_t;
@@ -345,152 +424,305 @@ pub struct _IO_FILE {
 }
 #[test]
 fn bindgen_test_layout__IO_FILE() {
-    assert_eq!(::std::mem::size_of::<_IO_FILE>(), 216usize, concat!("Size of: ", stringify!(_IO_FILE)));
-    assert_eq!(::std::mem::align_of::<_IO_FILE>(), 8usize, concat!("Alignment of ", stringify!(_IO_FILE)));
+    assert_eq!(
+        ::std::mem::size_of::<_IO_FILE>(),
+        216usize,
+        concat!("Size of: ", stringify!(_IO_FILE))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<_IO_FILE>(),
+        8usize,
+        concat!("Alignment of ", stringify!(_IO_FILE))
+    );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._flags as *const _ as usize },
         0usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_flags))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_flags)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_read_ptr as *const _ as usize },
         8usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_read_ptr))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_read_ptr)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_read_end as *const _ as usize },
         16usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_read_end))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_read_end)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_read_base as *const _ as usize },
         24usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_read_base))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_read_base)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_write_base as *const _ as usize },
         32usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_write_base))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_write_base)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_write_ptr as *const _ as usize },
         40usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_write_ptr))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_write_ptr)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_write_end as *const _ as usize },
         48usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_write_end))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_write_end)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_buf_base as *const _ as usize },
         56usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_buf_base))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_buf_base)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_buf_end as *const _ as usize },
         64usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_buf_end))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_buf_end)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_save_base as *const _ as usize },
         72usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_save_base))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_save_base)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_backup_base as *const _ as usize },
         80usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_backup_base))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_backup_base)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._IO_save_end as *const _ as usize },
         88usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_IO_save_end))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_IO_save_end)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._markers as *const _ as usize },
         96usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_markers))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_markers)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._chain as *const _ as usize },
         104usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_chain))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_chain)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._fileno as *const _ as usize },
         112usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_fileno))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_fileno)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._flags2 as *const _ as usize },
         116usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_flags2))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_flags2)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._old_offset as *const _ as usize },
         120usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_old_offset))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_old_offset)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._cur_column as *const _ as usize },
         128usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_cur_column))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_cur_column)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._vtable_offset as *const _ as usize },
         130usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_vtable_offset))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_vtable_offset)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._shortbuf as *const _ as usize },
         131usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_shortbuf))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_shortbuf)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._lock as *const _ as usize },
         136usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_lock))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_lock)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._offset as *const _ as usize },
         144usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_offset))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_offset)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._codecvt as *const _ as usize },
         152usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_codecvt))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_codecvt)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._wide_data as *const _ as usize },
         160usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_wide_data))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_wide_data)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._freeres_list as *const _ as usize },
         168usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_freeres_list))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_freeres_list)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._freeres_buf as *const _ as usize },
         176usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_freeres_buf))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_freeres_buf)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>())).__pad5 as *const _ as usize },
         184usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(__pad5))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(__pad5)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._mode as *const _ as usize },
         192usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_mode))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_mode)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<_IO_FILE>()))._unused2 as *const _ as usize },
         196usize,
-        concat!("Offset of field: ", stringify!(_IO_FILE), "::", stringify!(_unused2))
+        concat!(
+            "Offset of field: ",
+            stringify!(_IO_FILE),
+            "::",
+            stringify!(_unused2)
+        )
     );
 }
 pub type off_t = __off_t;
@@ -509,7 +741,10 @@ extern "C" {
     pub fn remove(__filename: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn rename(__old: *const ::std::os::raw::c_char, __new: *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+    pub fn rename(
+        __old: *const ::std::os::raw::c_char,
+        __new: *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn renameat(
@@ -529,7 +764,10 @@ extern "C" {
     pub fn tmpnam_r(__s: *mut ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    pub fn tempnam(__dir: *const ::std::os::raw::c_char, __pfx: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_char;
+    pub fn tempnam(
+        __dir: *const ::std::os::raw::c_char,
+        __pfx: *const ::std::os::raw::c_char,
+    ) -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
     pub fn fclose(__stream: *mut FILE) -> ::std::os::raw::c_int;
@@ -541,25 +779,45 @@ extern "C" {
     pub fn fflush_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn fopen(__filename: *const ::std::os::raw::c_char, __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn fopen(
+        __filename: *const ::std::os::raw::c_char,
+        __modes: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
 }
 extern "C" {
-    pub fn freopen(__filename: *const ::std::os::raw::c_char, __modes: *const ::std::os::raw::c_char, __stream: *mut FILE) -> *mut FILE;
+    pub fn freopen(
+        __filename: *const ::std::os::raw::c_char,
+        __modes: *const ::std::os::raw::c_char,
+        __stream: *mut FILE,
+    ) -> *mut FILE;
 }
 extern "C" {
-    pub fn fdopen(__fd: ::std::os::raw::c_int, __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn fdopen(__fd: ::std::os::raw::c_int, __modes: *const ::std::os::raw::c_char)
+        -> *mut FILE;
 }
 extern "C" {
-    pub fn fmemopen(__s: *mut ::std::os::raw::c_void, __len: size_t, __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn fmemopen(
+        __s: *mut ::std::os::raw::c_void,
+        __len: size_t,
+        __modes: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
 }
 extern "C" {
-    pub fn open_memstream(__bufloc: *mut *mut ::std::os::raw::c_char, __sizeloc: *mut size_t) -> *mut FILE;
+    pub fn open_memstream(
+        __bufloc: *mut *mut ::std::os::raw::c_char,
+        __sizeloc: *mut size_t,
+    ) -> *mut FILE;
 }
 extern "C" {
     pub fn setbuf(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char);
 }
 extern "C" {
-    pub fn setvbuf(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char, __modes: ::std::os::raw::c_int, __n: size_t) -> ::std::os::raw::c_int;
+    pub fn setvbuf(
+        __stream: *mut FILE,
+        __buf: *mut ::std::os::raw::c_char,
+        __modes: ::std::os::raw::c_int,
+        __n: size_t,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn setbuffer(__stream: *mut FILE, __buf: *mut ::std::os::raw::c_char, __size: size_t);
@@ -568,25 +826,49 @@ extern "C" {
     pub fn setlinebuf(__stream: *mut FILE);
 }
 extern "C" {
-    pub fn fprintf(__stream: *mut FILE, __format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn fprintf(
+        __stream: *mut FILE,
+        __format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn printf(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn sprintf(__s: *mut ::std::os::raw::c_char, __format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn sprintf(
+        __s: *mut ::std::os::raw::c_char,
+        __format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn vfprintf(__s: *mut FILE, __format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vfprintf(
+        __s: *mut FILE,
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn vprintf(__format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vprintf(
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn vsprintf(__s: *mut ::std::os::raw::c_char, __format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vsprintf(
+        __s: *mut ::std::os::raw::c_char,
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn snprintf(__s: *mut ::std::os::raw::c_char, __maxlen: ::std::os::raw::c_ulong, __format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn snprintf(
+        __s: *mut ::std::os::raw::c_char,
+        __maxlen: ::std::os::raw::c_ulong,
+        __format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn vsnprintf(
@@ -597,23 +879,43 @@ extern "C" {
     ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn vdprintf(__fd: ::std::os::raw::c_int, __fmt: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vdprintf(
+        __fd: ::std::os::raw::c_int,
+        __fmt: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn dprintf(__fd: ::std::os::raw::c_int, __fmt: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn dprintf(
+        __fd: ::std::os::raw::c_int,
+        __fmt: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn fscanf(__stream: *mut FILE, __format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn fscanf(
+        __stream: *mut FILE,
+        __format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn scanf(__format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn sscanf(__s: *const ::std::os::raw::c_char, __format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn sscanf(
+        __s: *const ::std::os::raw::c_char,
+        __format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[link_name = "\u{1}__isoc99_fscanf"]
-    pub fn fscanf1(__stream: *mut FILE, __format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn fscanf1(
+        __stream: *mut FILE,
+        __format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[link_name = "\u{1}__isoc99_scanf"]
@@ -621,28 +923,54 @@ extern "C" {
 }
 extern "C" {
     #[link_name = "\u{1}__isoc99_sscanf"]
-    pub fn sscanf1(__s: *const ::std::os::raw::c_char, __format: *const ::std::os::raw::c_char, ...) -> ::std::os::raw::c_int;
+    pub fn sscanf1(
+        __s: *const ::std::os::raw::c_char,
+        __format: *const ::std::os::raw::c_char,
+        ...
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn vfscanf(__s: *mut FILE, __format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vfscanf(
+        __s: *mut FILE,
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn vscanf(__format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vscanf(
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn vsscanf(__s: *const ::std::os::raw::c_char, __format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vsscanf(
+        __s: *const ::std::os::raw::c_char,
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[link_name = "\u{1}__isoc99_vfscanf"]
-    pub fn vfscanf1(__s: *mut FILE, __format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vfscanf1(
+        __s: *mut FILE,
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[link_name = "\u{1}__isoc99_vscanf"]
-    pub fn vscanf1(__format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vscanf1(
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[link_name = "\u{1}__isoc99_vsscanf"]
-    pub fn vsscanf1(__s: *const ::std::os::raw::c_char, __format: *const ::std::os::raw::c_char, __arg: *mut __va_list_tag) -> ::std::os::raw::c_int;
+    pub fn vsscanf1(
+        __s: *const ::std::os::raw::c_char,
+        __format: *const ::std::os::raw::c_char,
+        __arg: *mut __va_list_tag,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn fgetc(__stream: *mut FILE) -> ::std::os::raw::c_int;
@@ -672,7 +1000,8 @@ extern "C" {
     pub fn putchar(__c: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn fputc_unlocked(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;
+    pub fn fputc_unlocked(__c: ::std::os::raw::c_int, __stream: *mut FILE)
+        -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn putc_unlocked(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;
@@ -687,16 +1016,34 @@ extern "C" {
     pub fn putw(__w: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn fgets(__s: *mut ::std::os::raw::c_char, __n: ::std::os::raw::c_int, __stream: *mut FILE) -> *mut ::std::os::raw::c_char;
+    pub fn fgets(
+        __s: *mut ::std::os::raw::c_char,
+        __n: ::std::os::raw::c_int,
+        __stream: *mut FILE,
+    ) -> *mut ::std::os::raw::c_char;
 }
 extern "C" {
-    pub fn __getdelim(__lineptr: *mut *mut ::std::os::raw::c_char, __n: *mut size_t, __delimiter: ::std::os::raw::c_int, __stream: *mut FILE) -> __ssize_t;
+    pub fn __getdelim(
+        __lineptr: *mut *mut ::std::os::raw::c_char,
+        __n: *mut size_t,
+        __delimiter: ::std::os::raw::c_int,
+        __stream: *mut FILE,
+    ) -> __ssize_t;
 }
 extern "C" {
-    pub fn getdelim(__lineptr: *mut *mut ::std::os::raw::c_char, __n: *mut size_t, __delimiter: ::std::os::raw::c_int, __stream: *mut FILE) -> __ssize_t;
+    pub fn getdelim(
+        __lineptr: *mut *mut ::std::os::raw::c_char,
+        __n: *mut size_t,
+        __delimiter: ::std::os::raw::c_int,
+        __stream: *mut FILE,
+    ) -> __ssize_t;
 }
 extern "C" {
-    pub fn getline(__lineptr: *mut *mut ::std::os::raw::c_char, __n: *mut size_t, __stream: *mut FILE) -> __ssize_t;
+    pub fn getline(
+        __lineptr: *mut *mut ::std::os::raw::c_char,
+        __n: *mut size_t,
+        __stream: *mut FILE,
+    ) -> __ssize_t;
 }
 extern "C" {
     pub fn fputs(__s: *const ::std::os::raw::c_char, __stream: *mut FILE) -> ::std::os::raw::c_int;
@@ -708,19 +1055,43 @@ extern "C" {
     pub fn ungetc(__c: ::std::os::raw::c_int, __stream: *mut FILE) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn fread(__ptr: *mut ::std::os::raw::c_void, __size: ::std::os::raw::c_ulong, __n: ::std::os::raw::c_ulong, __stream: *mut FILE) -> ::std::os::raw::c_ulong;
+    pub fn fread(
+        __ptr: *mut ::std::os::raw::c_void,
+        __size: ::std::os::raw::c_ulong,
+        __n: ::std::os::raw::c_ulong,
+        __stream: *mut FILE,
+    ) -> ::std::os::raw::c_ulong;
 }
 extern "C" {
-    pub fn fwrite(__ptr: *const ::std::os::raw::c_void, __size: ::std::os::raw::c_ulong, __n: ::std::os::raw::c_ulong, __s: *mut FILE) -> ::std::os::raw::c_ulong;
+    pub fn fwrite(
+        __ptr: *const ::std::os::raw::c_void,
+        __size: ::std::os::raw::c_ulong,
+        __n: ::std::os::raw::c_ulong,
+        __s: *mut FILE,
+    ) -> ::std::os::raw::c_ulong;
 }
 extern "C" {
-    pub fn fread_unlocked(__ptr: *mut ::std::os::raw::c_void, __size: size_t, __n: size_t, __stream: *mut FILE) -> size_t;
+    pub fn fread_unlocked(
+        __ptr: *mut ::std::os::raw::c_void,
+        __size: size_t,
+        __n: size_t,
+        __stream: *mut FILE,
+    ) -> size_t;
 }
 extern "C" {
-    pub fn fwrite_unlocked(__ptr: *const ::std::os::raw::c_void, __size: size_t, __n: size_t, __stream: *mut FILE) -> size_t;
+    pub fn fwrite_unlocked(
+        __ptr: *const ::std::os::raw::c_void,
+        __size: size_t,
+        __n: size_t,
+        __stream: *mut FILE,
+    ) -> size_t;
 }
 extern "C" {
-    pub fn fseek(__stream: *mut FILE, __off: ::std::os::raw::c_long, __whence: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn fseek(
+        __stream: *mut FILE,
+        __off: ::std::os::raw::c_long,
+        __whence: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn ftell(__stream: *mut FILE) -> ::std::os::raw::c_long;
@@ -729,7 +1100,11 @@ extern "C" {
     pub fn rewind(__stream: *mut FILE);
 }
 extern "C" {
-    pub fn fseeko(__stream: *mut FILE, __off: __off_t, __whence: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
+    pub fn fseeko(
+        __stream: *mut FILE,
+        __off: __off_t,
+        __whence: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     pub fn ftello(__stream: *mut FILE) -> __off_t;
@@ -774,7 +1149,10 @@ extern "C" {
     pub fn fileno_unlocked(__stream: *mut FILE) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn popen(__command: *const ::std::os::raw::c_char, __modes: *const ::std::os::raw::c_char) -> *mut FILE;
+    pub fn popen(
+        __command: *const ::std::os::raw::c_char,
+        __modes: *const ::std::os::raw::c_char,
+    ) -> *mut FILE;
 }
 extern "C" {
     pub fn pclose(__stream: *mut FILE) -> ::std::os::raw::c_int;
@@ -825,11 +1203,13 @@ extern "C" {
 }
 extern "C" {
     #[doc = " \\brief register callback function for LOG(INFO) messages -- helpful messages"]
-    #[doc = " that are not errors."]
+    #[doc = "        that are not errors."]
     #[doc = " Note: this function can be called by multiple threads. The callback function"]
     #[doc = "       will run on the thread that registered it"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreeliteRegisterLogCallback(callback: ::std::option::Option<unsafe extern "C" fn(arg1: *const ::std::os::raw::c_char)>) -> ::std::os::raw::c_int;
+    pub fn TreeliteRegisterLogCallback(
+        callback: ::std::option::Option<unsafe extern "C" fn(arg1: *const ::std::os::raw::c_char)>,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\defgroup dmatrix"]
@@ -896,7 +1276,12 @@ extern "C" {
     #[doc = " \\param out_num_col used to set number of columns"]
     #[doc = " \\param out_nelem used to set number of nonzero entries"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreeliteDMatrixGetDimension(handle: DMatrixHandle, out_num_row: *mut size_t, out_num_col: *mut size_t, out_nelem: *mut size_t) -> ::std::os::raw::c_int;
+    pub fn TreeliteDMatrixGetDimension(
+        handle: DMatrixHandle,
+        out_num_row: *mut size_t,
+        out_num_col: *mut size_t,
+        out_nelem: *mut size_t,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief delete DMatrix from memory"]
@@ -918,35 +1303,39 @@ extern "C" {
     #[doc = " \\param num_worker_thread number of worker threads (-1 to use max number)"]
     #[doc = " \\param out handle to predictor"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreelitePredictorLoad(library_path: *const ::std::os::raw::c_char, num_worker_thread: ::std::os::raw::c_int, out: *mut PredictorHandle) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorLoad(
+        library_path: *const ::std::os::raw::c_char,
+        num_worker_thread: ::std::os::raw::c_int,
+        out: *mut PredictorHandle,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief Make predictions on a batch of data rows (synchronously). This function internally"]
-    #[doc = " divides the workload among all worker threads."]
+    #[doc = "divides the workload among all worker threads."]
     #[doc = ""]
-    #[doc = " Note. This function does not allocate the result vector. Use"]
-    #[doc = " TreeliteCreatePredictorOutputVector() convenience function to allocate the vector of"]
-    #[doc = " the right length and type."]
-    #[doc = " "]
-    #[doc = " Note. To access the element values from the output vector, you should cast the opaque"]
-    #[doc = " handle (PredictorOutputHandle type) to an appropriate pointer LeafOutputType*, where"]
-    #[doc = " the type is either float, double, or uint32_t. So carry out the following steps:"]
-    #[doc = " 1. Call TreelitePredictorQueryLeafOutputType() to obtain the type of the leaf output."]
-    #[doc = "    It will return a string (\"float32\", \"float64\", or \"uint32\") representing the type."]
-    #[doc = " 2. Depending on the type string, cast the output handle to float*, double*, or uint32_t*."]
-    #[doc = " 3. Now access the array with the casted pointer. The array's length is given by"]
-    #[doc = "    TreelitePredictorQueryResultSize()."]
+    #[doc = "Note. This function does not allocate the result vector. Use"]
+    #[doc = "TreeliteCreatePredictorOutputVector() convenience function to allocate the vector of"]
+    #[doc = "the right length and type."]
+    #[doc = ""]
+    #[doc = "Note. To access the element values from the output vector, you should cast the opaque"]
+    #[doc = "handle (PredictorOutputHandle type) to an appropriate pointer LeafOutputType*, where"]
+    #[doc = "the type is either float, double, or uint32_t. So carry out the following steps:"]
+    #[doc = "1. Call TreelitePredictorQueryLeafOutputType() to obtain the type of the leaf output."]
+    #[doc = "   It will return a string (\"float32\", \"float64\", or \"uint32\") representing the type."]
+    #[doc = "2. Depending on the type string, cast the output handle to float*, double*, or uint32_t*."]
+    #[doc = "3. Now access the array with the casted pointer. The array's length is given by"]
+    #[doc = "   TreelitePredictorQueryResultSize()."]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param batch the data matrix containing a batch of rows"]
     #[doc = " \\param verbose whether to produce extra messages"]
     #[doc = " \\param pred_margin whether to produce raw margin scores instead of"]
-    #[doc = "             transformed probabilities"]
+    #[doc = "   transformed probabilities"]
     #[doc = " \\param out_result Resulting output vector. This pointer must point to an array of length"]
-    #[doc = "            TreelitePredictorQueryResultSize() and of type"]
-    #[doc = "            TreelitePredictorQueryLeafOutputType()."]
+    #[doc = "   TreelitePredictorQueryResultSize() and of type"]
+    #[doc = "   TreelitePredictorQueryLeafOutputType()."]
     #[doc = " \\param out_result_size used to save length of the output vector,"]
-    #[doc = "                 which is guaranteed to be less than or equal to"]
-    #[doc = "                 TreelitePredictorQueryResultSize()"]
+    #[doc = "   which is guaranteed to be less than or equal to"]
+    #[doc = "   TreelitePredictorQueryResultSize()"]
     #[doc = " \\return 0 for success, -1 for failure"]
     pub fn TreelitePredictorPredictBatch(
         handle: PredictorHandle,
@@ -959,40 +1348,51 @@ extern "C" {
 }
 extern "C" {
     #[doc = " \\brief Convenience function to allocate an output vector that is able to hold the prediction"]
-    #[doc = " result for a given data matrix. The vector's length will be identical to"]
-    #[doc = " TreelitePredictorQueryResultSize() and its type will be identical to"]
-    #[doc = " TreelitePredictorQueryLeafOutputType(). To prevent memory leak, make sure to de-allocate"]
-    #[doc = " the vector with TreeliteDeletePredictorOutputVector()."]
-    #[doc = " "]
-    #[doc = " Note. To access the element values from the output vector, you should cast the opaque"]
-    #[doc = " handle (PredictorOutputHandle type) to an appropriate pointer LeafOutputType*, where"]
-    #[doc = " the type is either float, double, or uint32_t. So carry out the following steps:"]
-    #[doc = " 1. Call TreelitePredictorQueryLeafOutputType() to obtain the type of the leaf output."]
-    #[doc = "    It will return a string (\"float32\", \"float64\", or \"uint32\") representing the type."]
-    #[doc = " 2. Depending on the type string, cast the output handle to float*, double*, or uint32_t*."]
-    #[doc = " 3. Now access the array with the casted pointer. The array's length is given by"]
-    #[doc = "    TreelitePredictorQueryResultSize()."]
+    #[doc = "result for a given data matrix. The vector's length will be identical to"]
+    #[doc = "TreelitePredictorQueryResultSize() and its type will be identical to"]
+    #[doc = "TreelitePredictorQueryLeafOutputType(). To prevent memory leak, make sure to de-allocate"]
+    #[doc = "the vector with TreeliteDeletePredictorOutputVector()."]
+    #[doc = ""]
+    #[doc = "Note. To access the element values from the output vector, you should cast the opaque"]
+    #[doc = "handle (PredictorOutputHandle type) to an appropriate pointer LeafOutputType*, where"]
+    #[doc = "the type is either float, double, or uint32_t. So carry out the following steps:"]
+    #[doc = "1. Call TreelitePredictorQueryLeafOutputType() to obtain the type of the leaf output."]
+    #[doc = "   It will return a string (\"float32\", \"float64\", or \"uint32\") representing the type."]
+    #[doc = "2. Depending on the type string, cast the output handle to float*, double*, or uint32_t*."]
+    #[doc = "3. Now access the array with the casted pointer. The array's length is given by"]
+    #[doc = "TreelitePredictorQueryResultSize()."]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param batch the data matrix containing a batch of rows"]
     #[doc = " \\param out_output_vector Handle to the newly allocated output vector."]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreeliteCreatePredictorOutputVector(handle: PredictorHandle, batch: DMatrixHandle, out_output_vector: *mut PredictorOutputHandle) -> ::std::os::raw::c_int;
+    pub fn TreeliteCreatePredictorOutputVector(
+        handle: PredictorHandle,
+        batch: DMatrixHandle,
+        out_output_vector: *mut PredictorOutputHandle,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief De-allocate an output vector"]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param output_vector Output vector to delete from memory"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreeliteDeletePredictorOutputVector(handle: PredictorHandle, output_vector: PredictorOutputHandle) -> ::std::os::raw::c_int;
+    pub fn TreeliteDeletePredictorOutputVector(
+        handle: PredictorHandle,
+        output_vector: PredictorOutputHandle,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief Given a batch of data rows, query the necessary size of array to"]
-    #[doc = " hold predictions for all data points."]
+    #[doc = "        hold predictions for all data points."]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param batch the data matrix containing a batch of rows"]
     #[doc = " \\param out used to store the length of prediction array"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreelitePredictorQueryResultSize(handle: PredictorHandle, batch: DMatrixHandle, out: *mut size_t) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQueryResultSize(
+        handle: PredictorHandle,
+        batch: DMatrixHandle,
+        out: *mut size_t,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief Get the number classes in the loaded model"]
@@ -1001,44 +1401,65 @@ extern "C" {
     #[doc = " \\param handle predictor"]
     #[doc = " \\param out length of prediction array"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreelitePredictorQueryNumClass(handle: PredictorHandle, out: *mut size_t) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQueryNumClass(
+        handle: PredictorHandle,
+        out: *mut size_t,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief Get the width (number of features) of each instance used to train"]
-    #[doc = " the loaded model"]
+    #[doc = "        the loaded model"]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param out number of features"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreelitePredictorQueryNumFeature(handle: PredictorHandle, out: *mut size_t) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQueryNumFeature(
+        handle: PredictorHandle,
+        out: *mut size_t,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief Get name of post prediction transformation used to train"]
-    #[doc = " the loaded model"]
+    #[doc = "        the loaded model"]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param out name of post prediction transformation"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreelitePredictorQueryPredTransform(handle: PredictorHandle, out: *mut *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQueryPredTransform(
+        handle: PredictorHandle,
+        out: *mut *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief Get alpha value of sigmoid transformation used to train"]
-    #[doc = " the loaded model"]
+    #[doc = "        the loaded model"]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param out alpha value of sigmoid transformation"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreelitePredictorQuerySigmoidAlpha(handle: PredictorHandle, out: *mut f32) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQuerySigmoidAlpha(
+        handle: PredictorHandle,
+        out: *mut f32,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief Get global bias which adjusting predicted margin scores"]
     #[doc = " \\param handle predictor"]
     #[doc = " \\param out global bias value"]
     #[doc = " \\return 0 for success, -1 for failure"]
-    pub fn TreelitePredictorQueryGlobalBias(handle: PredictorHandle, out: *mut f32) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQueryGlobalBias(
+        handle: PredictorHandle,
+        out: *mut f32,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn TreelitePredictorQueryThresholdType(handle: PredictorHandle, out: *mut *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQueryThresholdType(
+        handle: PredictorHandle,
+        out: *mut *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
-    pub fn TreelitePredictorQueryLeafOutputType(handle: PredictorHandle, out: *mut *const ::std::os::raw::c_char) -> ::std::os::raw::c_int;
+    pub fn TreelitePredictorQueryLeafOutputType(
+        handle: PredictorHandle,
+        out: *mut *const ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
 }
 extern "C" {
     #[doc = " \\brief delete predictor from memory"]
@@ -1057,26 +1478,54 @@ pub struct __va_list_tag {
 }
 #[test]
 fn bindgen_test_layout___va_list_tag() {
-    assert_eq!(::std::mem::size_of::<__va_list_tag>(), 24usize, concat!("Size of: ", stringify!(__va_list_tag)));
-    assert_eq!(::std::mem::align_of::<__va_list_tag>(), 8usize, concat!("Alignment of ", stringify!(__va_list_tag)));
+    assert_eq!(
+        ::std::mem::size_of::<__va_list_tag>(),
+        24usize,
+        concat!("Size of: ", stringify!(__va_list_tag))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<__va_list_tag>(),
+        8usize,
+        concat!("Alignment of ", stringify!(__va_list_tag))
+    );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__va_list_tag>())).gp_offset as *const _ as usize },
         0usize,
-        concat!("Offset of field: ", stringify!(__va_list_tag), "::", stringify!(gp_offset))
+        concat!(
+            "Offset of field: ",
+            stringify!(__va_list_tag),
+            "::",
+            stringify!(gp_offset)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__va_list_tag>())).fp_offset as *const _ as usize },
         4usize,
-        concat!("Offset of field: ", stringify!(__va_list_tag), "::", stringify!(fp_offset))
+        concat!(
+            "Offset of field: ",
+            stringify!(__va_list_tag),
+            "::",
+            stringify!(fp_offset)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__va_list_tag>())).overflow_arg_area as *const _ as usize },
         8usize,
-        concat!("Offset of field: ", stringify!(__va_list_tag), "::", stringify!(overflow_arg_area))
+        concat!(
+            "Offset of field: ",
+            stringify!(__va_list_tag),
+            "::",
+            stringify!(overflow_arg_area)
+        )
     );
     assert_eq!(
         unsafe { &(*(::std::ptr::null::<__va_list_tag>())).reg_save_area as *const _ as usize },
         16usize,
-        concat!("Offset of field: ", stringify!(__va_list_tag), "::", stringify!(reg_save_area))
+        concat!(
+            "Offset of field: ",
+            stringify!(__va_list_tag),
+            "::",
+            stringify!(reg_save_area)
+        )
     );
 }

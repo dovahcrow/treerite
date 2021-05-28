@@ -1,25 +1,25 @@
 [package]
-name = "treerite"
-version = "0.1.0"
 authors = ["Weiyuan Wu <youngw@sfu.ca>"]
-edition = "2018"
-repository = "https://github.com/dovahcrow/treerite"
-readme = "README.md"
-license-file = "LICENSE"
 description = "Rust binding for treelite runtime (https://github.com/dmlc/treelite)"
+edition = "2018"
+license-file = "LICENSE"
+name = "treerite"
+readme = "README.md"
+repository = "https://github.com/dovahcrow/treerite"
+version = "0.1.3"
 
 [features]
-default = [ "static", "free_panic" ]
-static = []
+default = ["static", "free_panic"]
 dynamic = []
 free_panic = []
+static = []
 
 [dependencies]
 fehler = "1"
 libc = "0.2"
-thiserror = "1"
 ndarray = "0.14"
 num-traits = "0.2"
+thiserror = "1"
 
 [build-dependencies]
 cmake = "0.1"
@@ -28,5 +28,5 @@ cmake = "0.1"
 criterion = "0.3"
 
 [[bench]]
-name = "simple_bench"
 harness = false
+name = "simple_bench"
