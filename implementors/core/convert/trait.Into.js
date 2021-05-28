@@ -1,3 +1,3 @@
 (function() {var implementors = {};
-implementors["treerite"] = [{"text":"impl Into&lt;&amp;'static CStr&gt; for DataType","synthetic":false,"types":[]}];
+implementors["treerite"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/core/convert/trait.Into.html\" title=\"trait core::convert::Into\">Into</a>&lt;&amp;'static <a class=\"struct\" href=\"https://doc.rust-lang.org/nightly/std/ffi/c_str/struct.CStr.html\" title=\"struct std::ffi::c_str::CStr\">CStr</a>&gt; for <a class=\"enum\" href=\"treerite/enum.DataType.html\" title=\"enum treerite::DataType\">DataType</a>","synthetic":false,"types":["treerite::sys::DataType"]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

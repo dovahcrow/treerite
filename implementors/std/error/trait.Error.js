@@ -1,6 +1,6 @@
 (function() {var implementors = {};
-implementors["ndarray"] = [{"text":"impl Error for ShapeError","synthetic":false,"types":[]}];
-implementors["proc_macro2"] = [{"text":"impl Error for LexError","synthetic":false,"types":[]}];
-implementors["syn"] = [{"text":"impl Error for Error","synthetic":false,"types":[]}];
-implementors["treerite"] = [{"text":"impl Error for TreeRiteError","synthetic":false,"types":[]}];
+implementors["ndarray"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"struct\" href=\"ndarray/struct.ShapeError.html\" title=\"struct ndarray::ShapeError\">ShapeError</a>","synthetic":false,"types":["ndarray::error::ShapeError"]}];
+implementors["proc_macro2"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"struct\" href=\"proc_macro2/struct.LexError.html\" title=\"struct proc_macro2::LexError\">LexError</a>","synthetic":false,"types":["proc_macro2::LexError"]}];
+implementors["syn"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"struct\" href=\"syn/parse/struct.Error.html\" title=\"struct syn::parse::Error\">Error</a>","synthetic":false,"types":["syn::error::Error"]}];
+implementors["treerite"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/error/trait.Error.html\" title=\"trait std::error::Error\">Error</a> for <a class=\"enum\" href=\"treerite/enum.TreeRiteError.html\" title=\"enum treerite::TreeRiteError\">TreeRiteError</a>","synthetic":false,"types":["treerite::errors::TreeRiteError"]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

@@ -1,0 +1,1 @@
+window.ALL_CRATES = ["fehler","fehler_macros","libc","matrixmultiply","ndarray","num_complex","num_integer","num_traits","proc_macro2","quote","rawpointer","syn","thiserror","thiserror_impl","treerite","unicode_xid"];
