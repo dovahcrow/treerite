@@ -37,6 +37,17 @@ fn dmatrix_from_2darray() {
     DMatrix::from_2darray(&feat).unwrap();
 }
 
+#[test]
+fn dmatrix_from_csr_format(){
+    // this sample is from https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)
+    let data = vec![10f32, 20f32, 30f32, 40f32, 50f32, 60f32, 70f32, 80f32];
+    let indices = vec![0, 1, 1, 3, 2, 3, 4, 5];
+    let headers = vec![0, 2, 4, 7, 8];
+    let num_row = 3;
+    let num_col = 6;
+    DMatrix::from_csr_format(&headers, &indices, &data, num_row, num_col).unwrap();
+}
+
 // #[test]
 // fn dmatrix_from_libsvm_file() {
 //     DMatrix::<f32>::from_file("glass.scale", Some("libsvm".into()), 1, false).unwrap();

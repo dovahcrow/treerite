@@ -4,7 +4,7 @@ mod predictor;
 
 pub use self::bindings::{DMatrixHandle, PredictorHandle, PredictorOutputHandle};
 use self::bindings::{TreeliteGetLastError, TreeliteRegisterLogCallback};
-pub use self::dmatrix::{treelite_dmatrix_create_from_array, treelite_dmatrix_create_from_slice, treelite_dmatrix_free, treelite_dmatrix_get_dimension, FloatInfo};
+pub use self::dmatrix::{treelite_dmatrix_create_from_array, treelite_dmatrix_create_from_slice, treelite_dmatrix_create_from_csr_format, treelite_dmatrix_free, treelite_dmatrix_get_dimension, FloatInfo};
 pub use self::predictor::{
     treelite_create_predictor_output_vector, treelite_delete_predictor_output_vector, treelite_predictor_free, treelite_predictor_load, treelite_predictor_predict_batch,
     treelite_predictor_query_global_bias, treelite_predictor_query_leaf_output_type, treelite_predictor_query_num_class, treelite_predictor_query_num_feature,

@@ -1,4 +1,5 @@
-use super::bindings::{DMatrixHandle, TreeliteDMatrixCreateFromMat, TreeliteDMatrixFree, TreeliteDMatrixGetDimension};
+use super::bindings::{DMatrixHandle, TreeliteDMatrixCreateFromMat, TreeliteDMatrixCreateFromCSR, TreeliteDMatrixFree, TreeliteDMatrixGetDimension};
+use super::bindings::size_t;
 use super::{DataType, RetCodeCheck};
 use crate::errors::TreeRiteError;
 use fehler::{throw, throws};
@@ -63,6 +64,29 @@ pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T
         )
     }
     .check()?;
+    out
+}
+
+#[throws(TreeRiteError)]
+pub fn treelite_dmatrix_create_from_csr_format<'a, T: Float + FloatInfo>(
+    headers: &'a [u64],
+    indices: &'a [u32],
+    data: &'a [T],
+    num_row: u64,
+    num_col: u64,
+) -> DMatrixHandle{
+    let mut out = null_mut();
+    unsafe {
+        TreeliteDMatrixCreateFromCSR(
+            data.as_ptr() as *const c_void,
+            Into::<&'static CStr>::into(T::DATA_TYPE).as_ptr(),
+            indices.as_ptr() as *const u32,
+            headers.as_ptr() as *const size_t,
+            num_row,
+            num_col,
+            &mut out,
+        )
+    }.check()?;
     out
 }
 
