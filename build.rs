@@ -6,7 +6,9 @@ fn main() {
 
 #[cfg(feature = "static")]
 fn build_lib() {
-    let dst = cmake::Config::new("treelite").define("BUILD_STATIC_LIBS", "ON").build();
+    let dst = cmake::Config::new("treelite")
+        .define("BUILD_STATIC_LIBS", "ON")
+        .build();
     println!("cargo:rustc-link-search={}/lib", dst.display());
     println!("cargo:rustc-link-lib=static=treelite_runtime_static");
     println!("cargo:rustc-link-lib=stdc++");
@@ -22,7 +24,10 @@ fn build_lib() {
 
 #[cfg(not(target_os = "windows"))]
 fn add_search_path() {
-    for path in std::env::var("LD_LIBRARY_PATH").unwrap_or_else(|_| "".to_string()).split(":") {
+    for path in std::env::var("LD_LIBRARY_PATH")
+        .unwrap_or_else(|_| "".to_string())
+        .split(":")
+    {
         if path.trim().len() == 0 {
             continue;
         }
@@ -32,7 +37,10 @@ fn add_search_path() {
 
 #[cfg(target_os = "windows")]
 fn add_search_path() {
-    for path in std::env::var("PATH").unwrap_or_else(|_| "".to_string()).split(";") {
+    for path in std::env::var("PATH")
+        .unwrap_or_else(|_| "".to_string())
+        .split(";")
+    {
         if path.trim().len() == 0 {
             continue;
         }

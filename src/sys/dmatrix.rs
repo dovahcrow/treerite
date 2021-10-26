@@ -1,4 +1,8 @@
-use super::bindings::{DMatrixHandle, TreeliteDMatrixCreateFromMat, TreeliteDMatrixFree, TreeliteDMatrixGetDimension};
+use super::bindings::size_t;
+use super::bindings::{
+    DMatrixHandle, TreeliteDMatrixCreateFromCSR, TreeliteDMatrixCreateFromMat, TreeliteDMatrixFree,
+    TreeliteDMatrixGetDimension,
+};
 use super::{DataType, RetCodeCheck};
 use crate::errors::TreeRiteError;
 use fehler::{throw, throws};
@@ -30,7 +34,9 @@ impl FloatInfo for f32 {
 }
 
 #[throws(TreeRiteError)]
-pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayView<'a, F, Ix2>) -> DMatrixHandle {
+pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(
+    data: ArrayView<'a, F, Ix2>,
+) -> DMatrixHandle {
     if !data.is_standard_layout() {
         throw!(TreeRiteError::DataNotCContiguous);
     }
@@ -50,7 +56,9 @@ pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayV
 }
 
 #[throws(TreeRiteError)]
-pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T]) -> DMatrixHandle {
+pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(
+    data: &'a [T],
+) -> DMatrixHandle {
     let mut out = null_mut();
     unsafe {
         TreeliteDMatrixCreateFromMat(
@@ -59,6 +67,30 @@ pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T
             1,
             data.len() as u64,
             &T::MISSING as *const T as *const c_void,
+            &mut out,
+        )
+    }
+    .check()?;
+    out
+}
+
+#[throws(TreeRiteError)]
+pub fn treelite_dmatrix_create_from_csr_format<'a, T: Float + FloatInfo>(
+    headers: &'a [u64],
+    indices: &'a [u32],
+    data: &'a [T],
+    num_row: u64,
+    num_col: u64,
+) -> DMatrixHandle {
+    let mut out = null_mut();
+    unsafe {
+        TreeliteDMatrixCreateFromCSR(
+            data.as_ptr() as *const c_void,
+            Into::<&'static CStr>::into(T::DATA_TYPE).as_ptr(),
+            indices.as_ptr() as *const u32,
+            headers.as_ptr() as *const size_t,
+            num_row,
+            num_col,
             &mut out,
         )
     }
