@@ -1,7 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/usr/local/cargo/registry/src/github.com-1ecc6299db9ec823/ndarray-0.14.0/src/slice.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>slice.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings"></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-<link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
-                <a id="settings-menu" href="../../settings.html"><img src="../../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;usr&#x2F;local&#x2F;cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.14.0&#x2F;src&#x2F;slice.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>slice.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -723,20 +720,19 @@
 <span id="720">720</span>
 <span id="721">721</span>
 <span id="722">722</span>
-</pre><div class="example-wrap"><pre class="rust ">
-<span class="comment">// Copyright 2014-2016 bluss and ndarray developers.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2014-2016 bluss and ndarray developers.</span>
 <span class="comment">//</span>
 <span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
 <span class="comment">// &lt;LICENSE-MIT or http://opensource.org/licenses/MIT&gt;, at your</span>
 <span class="comment">// option. This file may not be copied, modified, or distributed</span>
 <span class="comment">// except according to those terms.</span>
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">dimension</span>::<span class="ident">slices_intersect</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">error</span>::{<span class="ident">ErrorKind</span>, <span class="ident">ShapeError</span>};
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::dimension::slices_intersect</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::error</span>::{<span class="ident">ErrorKind</span>, <span class="ident">ShapeError</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">ArrayViewMut</span>, <span class="ident">Dimension</span>};
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">Range</span>, <span class="ident">RangeFrom</span>, <span class="ident">RangeFull</span>, <span class="ident">RangeInclusive</span>, <span class="ident">RangeTo</span>, <span class="ident">RangeToInclusive</span>};
+<span class="kw">use</span> <span class="ident">std::fmt</span>;
+<span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
+<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">Range</span>, <span class="ident">RangeFrom</span>, <span class="ident">RangeFull</span>, <span class="ident">RangeInclusive</span>, <span class="ident">RangeTo</span>, <span class="ident">RangeToInclusive</span>};
 
 <span class="doccomment">/// A slice (range with step size).</span>
 <span class="doccomment">///</span>
@@ -774,7 +770,7 @@
     <span class="doccomment">/// `step` must be nonzero.</span>
     <span class="doccomment">/// (This method checks with a debug assertion that `step` is not zero.)</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">start</span>: <span class="ident">isize</span>, <span class="ident">end</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">isize</span><span class="op">&gt;</span>, <span class="ident">step</span>: <span class="ident">isize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Slice</span> {
-        <span class="macro">debug_assert_ne</span><span class="macro">!</span>(<span class="ident">step</span>, <span class="number">0</span>, <span class="string">&quot;Slice::new: step must be nonzero&quot;</span>);
+        <span class="macro">debug_assert_ne!</span>(<span class="ident">step</span>, <span class="number">0</span>, <span class="string">&quot;Slice::new: step must be nonzero&quot;</span>);
         <span class="ident">Slice</span> { <span class="ident">start</span>, <span class="ident">end</span>, <span class="ident">step</span> }
     }
 
@@ -785,7 +781,7 @@
     <span class="doccomment">/// (This method checks with a debug assertion that `step` is not zero.)</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">step_by</span>(<span class="self">self</span>, <span class="ident">step</span>: <span class="ident">isize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="macro">debug_assert_ne</span><span class="macro">!</span>(<span class="ident">step</span>, <span class="number">0</span>, <span class="string">&quot;Slice::step_by: step must be nonzero&quot;</span>);
+        <span class="macro">debug_assert_ne!</span>(<span class="ident">step</span>, <span class="number">0</span>, <span class="string">&quot;Slice::step_by: step must be nonzero&quot;</span>);
         <span class="ident">Slice</span> {
             <span class="ident">step</span>: <span class="self">self</span>.<span class="ident">step</span> <span class="op">*</span> <span class="ident">step</span>,
             ..<span class="self">self</span>
@@ -831,17 +827,17 @@
     <span class="ident">Index</span>(<span class="ident">isize</span>),
 }
 
-<span class="macro">copy_and_clone</span><span class="macro">!</span> {<span class="ident">SliceOrIndex</span>}
+<span class="macro">copy_and_clone!</span> {<span class="ident">SliceOrIndex</span>}
 
 <span class="kw">impl</span> <span class="ident">SliceOrIndex</span> {
     <span class="doccomment">/// Returns `true` if `self` is a `Slice` value.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches</span><span class="macro">!</span>(<span class="self">self</span>, <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span> { .. })
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident">SliceOrIndex::Slice</span> { .. })
     }
 
     <span class="doccomment">/// Returns `true` if `self` is an `Index` value.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="macro">matches</span><span class="macro">!</span>(<span class="self">self</span>, <span class="ident">SliceOrIndex</span>::<span class="ident">Index</span>(<span class="kw">_</span>))
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident">SliceOrIndex::Index</span>(<span class="kw">_</span>))
     }
 
     <span class="doccomment">/// Returns a new `SliceOrIndex` with the given step size (multiplied with</span>
@@ -851,36 +847,36 @@
     <span class="doccomment">/// (This method checks with a debug assertion that `step` is not zero.)</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">step_by</span>(<span class="self">self</span>, <span class="ident">step</span>: <span class="ident">isize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="macro">debug_assert_ne</span><span class="macro">!</span>(<span class="ident">step</span>, <span class="number">0</span>, <span class="string">&quot;SliceOrIndex::step_by: step must be nonzero&quot;</span>);
+        <span class="macro">debug_assert_ne!</span>(<span class="ident">step</span>, <span class="number">0</span>, <span class="string">&quot;SliceOrIndex::step_by: step must be nonzero&quot;</span>);
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span> {
+            <span class="ident">SliceOrIndex::Slice</span> {
                 <span class="ident">start</span>,
                 <span class="ident">end</span>,
                 <span class="ident">step</span>: <span class="ident">orig_step</span>,
-            } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span> {
+            } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SliceOrIndex::Slice</span> {
                 <span class="ident">start</span>,
                 <span class="ident">end</span>,
                 <span class="ident">step</span>: <span class="ident">orig_step</span> <span class="op">*</span> <span class="ident">step</span>,
             },
-            <span class="ident">SliceOrIndex</span>::<span class="ident">Index</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SliceOrIndex</span>::<span class="ident">Index</span>(<span class="ident">s</span>),
+            <span class="ident">SliceOrIndex::Index</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">SliceOrIndex::Index</span>(<span class="ident">s</span>),
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">fmt</span>::<span class="ident">Display</span> <span class="kw">for</span> <span class="ident">SliceOrIndex</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt</span>::<span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt</span>::<span class="prelude-ty">Result</span> {
+<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">SliceOrIndex</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">SliceOrIndex</span>::<span class="ident">Index</span>(<span class="ident">index</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">index</span>)<span class="question-mark">?</span>,
-            <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span> { <span class="ident">start</span>, <span class="ident">end</span>, <span class="ident">step</span> } <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">SliceOrIndex::Index</span>(<span class="ident">index</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">index</span>)<span class="question-mark">?</span>,
+            <span class="ident">SliceOrIndex::Slice</span> { <span class="ident">start</span>, <span class="ident">end</span>, <span class="ident">step</span> } <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">if</span> <span class="ident">start</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                    <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">start</span>)<span class="question-mark">?</span>;
+                    <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">start</span>)<span class="question-mark">?</span>;
                 }
-                <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;..&quot;</span>)<span class="question-mark">?</span>;
+                <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;..&quot;</span>)<span class="question-mark">?</span>;
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">i</span>) <span class="op">=</span> <span class="ident">end</span> {
-                    <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">i</span>)<span class="question-mark">?</span>;
+                    <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">i</span>)<span class="question-mark">?</span>;
                 }
                 <span class="kw">if</span> <span class="ident">step</span> <span class="op">!</span><span class="op">=</span> <span class="number">1</span> {
-                    <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;;{}&quot;</span>, <span class="ident">step</span>)<span class="question-mark">?</span>;
+                    <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;;{}&quot;</span>, <span class="ident">step</span>)<span class="question-mark">?</span>;
                 }
             }
         }
@@ -888,11 +884,11 @@
     }
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_slice_variant_from_range</span> {
-    (<span class="macro-nonterminal">$</span><span class="self">self</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span>:<span class="ident">path</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">Range</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_slice_variant_from_range</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span>:<span class="ident">path</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+            <span class="attribute">#[<span class="ident">inline</span>]</span>
+            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">Range</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span> {
                     <span class="ident">start</span>: <span class="ident">r</span>.<span class="ident">start</span> <span class="kw">as</span> <span class="ident">isize</span>,
                     <span class="ident">end</span>: <span class="prelude-val">Some</span>(<span class="ident">r</span>.<span class="ident">end</span> <span class="kw">as</span> <span class="ident">isize</span>),
@@ -901,10 +897,10 @@
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-                <span class="kw">let</span> <span class="macro-nonterminal">end</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">r</span>.<span class="ident">end</span>() <span class="kw">as</span> <span class="ident">isize</span>;
+        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+            <span class="attribute">#[<span class="ident">inline</span>]</span>
+            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+                <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">r</span>.<span class="ident">end</span>() <span class="kw">as</span> <span class="ident">isize</span>;
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span> {
                     <span class="ident">start</span>: <span class="kw-2">*</span><span class="ident">r</span>.<span class="ident">start</span>() <span class="kw">as</span> <span class="ident">isize</span>,
                     <span class="ident">end</span>: <span class="kw">if</span> <span class="ident">end</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> { <span class="prelude-val">None</span> } <span class="kw">else</span> { <span class="prelude-val">Some</span>(<span class="ident">end</span> <span class="op">+</span> <span class="number">1</span>) },
@@ -913,9 +909,9 @@
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeFrom</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeFrom</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
+        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeFrom</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+            <span class="attribute">#[<span class="ident">inline</span>]</span>
+            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeFrom</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span> {
                     <span class="ident">start</span>: <span class="ident">r</span>.<span class="ident">start</span> <span class="kw">as</span> <span class="ident">isize</span>,
                     <span class="ident">end</span>: <span class="prelude-val">None</span>,
@@ -924,9 +920,9 @@
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeTo</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeTo</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
+        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeTo</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+            <span class="attribute">#[<span class="ident">inline</span>]</span>
+            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeTo</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span> {
                     <span class="ident">start</span>: <span class="number">0</span>,
                     <span class="ident">end</span>: <span class="prelude-val">Some</span>(<span class="ident">r</span>.<span class="ident">end</span> <span class="kw">as</span> <span class="ident">isize</span>),
@@ -935,10 +931,10 @@
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeToInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-            <span class="attribute">#[<span class="macro-nonterminal">inline</span>]</span>
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeToInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-                <span class="kw">let</span> <span class="macro-nonterminal">end</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">end</span> <span class="kw">as</span> <span class="ident">isize</span>;
+        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeToInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+            <span class="attribute">#[<span class="ident">inline</span>]</span>
+            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="ident">RangeToInclusive</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+                <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">end</span> <span class="kw">as</span> <span class="ident">isize</span>;
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">constructor</span> {
                     <span class="ident">start</span>: <span class="number">0</span>,
                     <span class="ident">end</span>: <span class="kw">if</span> <span class="ident">end</span> <span class="op">=</span><span class="op">=</span> <span class="op">-</span><span class="number">1</span> { <span class="prelude-val">None</span> } <span class="kw">else</span> { <span class="prelude-val">Some</span>(<span class="ident">end</span> <span class="op">+</span> <span class="number">1</span>) },
@@ -948,12 +944,12 @@
         }
     };
 }
-<span class="macro">impl_slice_variant_from_range</span><span class="macro">!</span>(<span class="ident">Slice</span>, <span class="ident">Slice</span>, <span class="ident">isize</span>);
-<span class="macro">impl_slice_variant_from_range</span><span class="macro">!</span>(<span class="ident">Slice</span>, <span class="ident">Slice</span>, <span class="ident">usize</span>);
-<span class="macro">impl_slice_variant_from_range</span><span class="macro">!</span>(<span class="ident">Slice</span>, <span class="ident">Slice</span>, <span class="ident">i32</span>);
-<span class="macro">impl_slice_variant_from_range</span><span class="macro">!</span>(<span class="ident">SliceOrIndex</span>, <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span>, <span class="ident">isize</span>);
-<span class="macro">impl_slice_variant_from_range</span><span class="macro">!</span>(<span class="ident">SliceOrIndex</span>, <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span>, <span class="ident">usize</span>);
-<span class="macro">impl_slice_variant_from_range</span><span class="macro">!</span>(<span class="ident">SliceOrIndex</span>, <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span>, <span class="ident">i32</span>);
+<span class="macro">impl_slice_variant_from_range!</span>(<span class="ident">Slice</span>, <span class="ident">Slice</span>, <span class="ident">isize</span>);
+<span class="macro">impl_slice_variant_from_range!</span>(<span class="ident">Slice</span>, <span class="ident">Slice</span>, <span class="ident">usize</span>);
+<span class="macro">impl_slice_variant_from_range!</span>(<span class="ident">Slice</span>, <span class="ident">Slice</span>, <span class="ident">i32</span>);
+<span class="macro">impl_slice_variant_from_range!</span>(<span class="ident">SliceOrIndex</span>, <span class="ident">SliceOrIndex::Slice</span>, <span class="ident">isize</span>);
+<span class="macro">impl_slice_variant_from_range!</span>(<span class="ident">SliceOrIndex</span>, <span class="ident">SliceOrIndex::Slice</span>, <span class="ident">usize</span>);
+<span class="macro">impl_slice_variant_from_range!</span>(<span class="ident">SliceOrIndex</span>, <span class="ident">SliceOrIndex::Slice</span>, <span class="ident">i32</span>);
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeFull</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Slice</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
@@ -969,7 +965,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">RangeFull</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SliceOrIndex</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="ident">RangeFull</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SliceOrIndex</span> {
-        <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span> {
+        <span class="ident">SliceOrIndex::Slice</span> {
             <span class="ident">start</span>: <span class="number">0</span>,
             <span class="ident">end</span>: <span class="prelude-val">None</span>,
             <span class="ident">step</span>: <span class="number">1</span>,
@@ -980,7 +976,7 @@
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Slice</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SliceOrIndex</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="ident">Slice</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SliceOrIndex</span> {
-        <span class="ident">SliceOrIndex</span>::<span class="ident">Slice</span> {
+        <span class="ident">SliceOrIndex::Slice</span> {
             <span class="ident">start</span>: <span class="ident">s</span>.<span class="ident">start</span>,
             <span class="ident">end</span>: <span class="ident">s</span>.<span class="ident">end</span>,
             <span class="ident">step</span>: <span class="ident">s</span>.<span class="ident">step</span>,
@@ -988,19 +984,19 @@
     }
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_sliceorindex_from_index</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_sliceorindex_from_index</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SliceOrIndex</span> {
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">r</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">index</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SliceOrIndex</span> {
-                <span class="ident">SliceOrIndex</span>::<span class="ident">Index</span>(<span class="ident">r</span> <span class="kw">as</span> <span class="ident">isize</span>)
+                <span class="ident">SliceOrIndex::Index</span>(<span class="ident">r</span> <span class="kw">as</span> <span class="ident">isize</span>)
             }
         }
     };
 }
-<span class="macro">impl_sliceorindex_from_index</span><span class="macro">!</span>(<span class="ident">isize</span>);
-<span class="macro">impl_sliceorindex_from_index</span><span class="macro">!</span>(<span class="ident">usize</span>);
-<span class="macro">impl_sliceorindex_from_index</span><span class="macro">!</span>(<span class="ident">i32</span>);
+<span class="macro">impl_sliceorindex_from_index!</span>(<span class="ident">isize</span>);
+<span class="macro">impl_sliceorindex_from_index!</span>(<span class="ident">usize</span>);
+<span class="macro">impl_sliceorindex_from_index!</span>(<span class="ident">i32</span>);
 
 <span class="doccomment">/// Represents all of the necessary information to perform a slice.</span>
 <span class="doccomment">///</span>
@@ -1021,7 +1017,7 @@
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
 {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">T</span>;
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="self">Self</span>::<span class="ident">Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">indices</span>
     }
 }
@@ -1049,9 +1045,9 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Errors if `D` is not consistent with `indices`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">indices</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SliceInfo</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">ShapeError</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ndim</span>) <span class="op">=</span> <span class="ident">D</span>::<span class="ident">NDIM</span> {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ndim</span>) <span class="op">=</span> <span class="ident">D::NDIM</span> {
             <span class="kw">if</span> <span class="ident">ndim</span> <span class="op">!</span><span class="op">=</span> <span class="ident">indices</span>.<span class="ident">as_ref</span>().<span class="ident">iter</span>().<span class="ident">filter</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">is_slice</span>()).<span class="ident">count</span>() {
-                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ShapeError</span>::<span class="ident">from_kind</span>(<span class="ident">ErrorKind</span>::<span class="ident">IncompatibleShape</span>));
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ShapeError::from_kind</span>(<span class="ident">ErrorKind::IncompatibleShape</span>));
             }
         }
         <span class="prelude-val">Ok</span>(<span class="ident">SliceInfo</span> {
@@ -1074,7 +1070,7 @@
     <span class="doccomment">/// `D::NDIM.unwrap()`. Otherwise, the value is calculated by iterating</span>
     <span class="doccomment">/// over the ranges/indices.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">out_ndim</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
-        <span class="ident">D</span>::<span class="ident">NDIM</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="ident">D::NDIM</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> {
             <span class="self">self</span>.<span class="ident">indices</span>
                 .<span class="ident">as_ref</span>()
                 .<span class="ident">iter</span>()
@@ -1136,35 +1132,35 @@
     <span class="kw">fn</span> <span class="ident">next_dim</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D2</span><span class="op">&gt;</span>;
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_slicenextdim_equal</span> {
-    (<span class="macro-nonterminal">$</span><span class="self">self</span>:<span class="macro-nonterminal">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D1</span>: <span class="ident">Dimension</span><span class="op">&gt;</span> <span class="ident">SliceNextDim</span><span class="op">&lt;</span><span class="ident">D1</span>, <span class="ident">D1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-            <span class="kw">fn</span> <span class="macro-nonterminal">next_dim</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span><span class="op">&gt;</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_slicenextdim_equal</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D1</span>: <span class="ident">Dimension</span><span class="op">&gt;</span> <span class="ident">SliceNextDim</span><span class="op">&lt;</span><span class="ident">D1</span>, <span class="ident">D1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+            <span class="kw">fn</span> <span class="ident">next_dim</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span><span class="op">&gt;</span> {
                 <span class="ident">PhantomData</span>
             }
         }
     };
 }
-<span class="macro">impl_slicenextdim_equal</span><span class="macro">!</span>(<span class="ident">isize</span>);
-<span class="macro">impl_slicenextdim_equal</span><span class="macro">!</span>(<span class="ident">usize</span>);
-<span class="macro">impl_slicenextdim_equal</span><span class="macro">!</span>(<span class="ident">i32</span>);
+<span class="macro">impl_slicenextdim_equal!</span>(<span class="ident">isize</span>);
+<span class="macro">impl_slicenextdim_equal!</span>(<span class="ident">usize</span>);
+<span class="macro">impl_slicenextdim_equal!</span>(<span class="ident">i32</span>);
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_slicenextdim_larger</span> {
-    (($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">generics</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>), <span class="macro-nonterminal">$</span><span class="self">self</span>:<span class="macro-nonterminal">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D1</span>: <span class="ident">Dimension</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">generics</span>)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">SliceNextDim</span><span class="op">&lt;</span><span class="ident">D1</span>, <span class="ident">D1</span>::<span class="ident">Larger</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="self">self</span> {
-            <span class="kw">fn</span> <span class="macro-nonterminal">next_dim</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span>::<span class="ident">Larger</span><span class="op">&gt;</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_slicenextdim_larger</span> {
+    (($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">generics</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">D1</span>: <span class="ident">Dimension</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">generics</span>)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">SliceNextDim</span><span class="op">&lt;</span><span class="ident">D1</span>, <span class="ident">D1::Larger</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span> {
+            <span class="kw">fn</span> <span class="ident">next_dim</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="kw">_</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">D1::Larger</span><span class="op">&gt;</span> {
                 <span class="ident">PhantomData</span>
             }
         }
     }
 }
-<span class="macro">impl_slicenextdim_larger</span><span class="macro">!</span>((<span class="ident">T</span>), <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="macro">impl_slicenextdim_larger</span><span class="macro">!</span>((<span class="ident">T</span>), <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="macro">impl_slicenextdim_larger</span><span class="macro">!</span>((<span class="ident">T</span>), <span class="ident">RangeFrom</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="macro">impl_slicenextdim_larger</span><span class="macro">!</span>((<span class="ident">T</span>), <span class="ident">RangeTo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="macro">impl_slicenextdim_larger</span><span class="macro">!</span>((<span class="ident">T</span>), <span class="ident">RangeToInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
-<span class="macro">impl_slicenextdim_larger</span><span class="macro">!</span>((), <span class="ident">RangeFull</span>);
-<span class="macro">impl_slicenextdim_larger</span><span class="macro">!</span>((), <span class="ident">Slice</span>);
+<span class="macro">impl_slicenextdim_larger!</span>((<span class="ident">T</span>), <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+<span class="macro">impl_slicenextdim_larger!</span>((<span class="ident">T</span>), <span class="ident">RangeInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+<span class="macro">impl_slicenextdim_larger!</span>((<span class="ident">T</span>), <span class="ident">RangeFrom</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+<span class="macro">impl_slicenextdim_larger!</span>((<span class="ident">T</span>), <span class="ident">RangeTo</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+<span class="macro">impl_slicenextdim_larger!</span>((<span class="ident">T</span>), <span class="ident">RangeToInclusive</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>);
+<span class="macro">impl_slicenextdim_larger!</span>((), <span class="ident">RangeFull</span>);
+<span class="macro">impl_slicenextdim_larger!</span>((), <span class="ident">Slice</span>);
 
 <span class="doccomment">/// Slice argument constructor.</span>
 <span class="doccomment">///</span>
@@ -1258,16 +1254,16 @@
 <span class="doccomment">/// # }</span>
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">s</span>(
+<span class="macro">macro_rules!</span> <span class="ident">s</span>(
     <span class="comment">// convert a..b;c into @convert(a..b, c), final item</span>
     (@<span class="ident">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span> {
             <span class="ident">r</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">out_dim</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceNextDim</span>::<span class="ident">next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>);
+                <span class="kw">let</span> <span class="ident">out_dim</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceNextDim::next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>);
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unsafe_code</span>)]</span>
                 <span class="kw">unsafe</span> {
-                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceInfo</span>::<span class="ident">new_unchecked</span>(
-                        [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>)],
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceInfo::new_unchecked</span>(
+                        [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>)],
                         <span class="ident">out_dim</span>,
                     )
                 }
@@ -1278,11 +1274,11 @@
     (@<span class="ident">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span> {
             <span class="ident">r</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">out_dim</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceNextDim</span>::<span class="ident">next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>);
+                <span class="kw">let</span> <span class="ident">out_dim</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceNextDim::next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>);
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unsafe_code</span>)]</span>
                 <span class="kw">unsafe</span> {
-                    <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceInfo</span>::<span class="ident">new_unchecked</span>(
-                        [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>)],
+                    <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceInfo::new_unchecked</span>(
+                        [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>)],
                         <span class="ident">out_dim</span>,
                     )
                 }
@@ -1291,19 +1287,19 @@
     };
     <span class="comment">// convert a..b;c into @convert(a..b, c), final item, trailing comma</span>
     (@<span class="ident">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>:<span class="ident">expr</span> ,) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>[@<span class="macro-nonterminal">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>]
+        <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>[@<span class="macro-nonterminal">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>]
     };
     <span class="comment">// convert a..b into @convert(a..b), final item, trailing comma</span>
     (@<span class="ident">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span> ,) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>[@<span class="macro-nonterminal">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>]
+        <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>[@<span class="macro-nonterminal">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>]
     };
     <span class="comment">// convert a..b;c into @convert(a..b, c)</span>
     (@<span class="ident">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span> {
             <span class="ident">r</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>[@<span class="macro-nonterminal">parse</span>
-                   <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceNextDim</span>::<span class="ident">next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),
-                   [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>),]
+                <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>[@<span class="macro-nonterminal">parse</span>
+                   <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceNextDim::next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),
+                   [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>),]
                    $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>)<span class="op">*</span>
                 ]
             }
@@ -1313,37 +1309,37 @@
     (@<span class="ident">parse</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span> {
             <span class="ident">r</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>[@<span class="macro-nonterminal">parse</span>
-                   <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceNextDim</span>::<span class="ident">next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),
-                   [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>),]
+                <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>[@<span class="macro-nonterminal">parse</span>
+                   <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceNextDim::next_dim</span>(<span class="kw-2">&amp;</span><span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),
+                   [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">stack</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>(@<span class="macro-nonterminal">convert</span> <span class="ident">r</span>),]
                    $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>)<span class="op">*</span>
                 ]
             }
         }
     };
     <span class="comment">// empty call, i.e. `s![]`</span>
-    (@<span class="ident">parse</span> ::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Ix0</span><span class="op">&gt;</span>, []) <span class="op">=</span><span class="op">&gt;</span> {
+    (@<span class="ident">parse</span> <span class="ident">::std::marker::PhantomData</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Ix0</span><span class="op">&gt;</span>, []) <span class="op">=</span><span class="op">&gt;</span> {
         {
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unsafe_code</span>)]</span>
             <span class="kw">unsafe</span> {
-                <span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceInfo</span>::<span class="ident">new_unchecked</span>([], ::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Ix0</span><span class="op">&gt;</span>)
+                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceInfo::new_unchecked</span>([], <span class="ident">::std::marker::PhantomData</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Ix0</span><span class="op">&gt;</span>)
             }
         }
     };
     <span class="comment">// Catch-all clause for syntax errors</span>
-    (@<span class="ident">parse</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="macro">compile_error</span><span class="macro">!</span>(<span class="string">&quot;Invalid syntax in s![] call.&quot;</span>) };
+    (@<span class="ident">parse</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="macro">compile_error!</span>(<span class="string">&quot;Invalid syntax in s![] call.&quot;</span>) };
     <span class="comment">// convert range/index into SliceOrIndex</span>
     (@<span class="ident">convert</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceOrIndex</span> <span class="kw">as</span> ::<span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">From</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>)
+        <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceOrIndex</span> <span class="kw">as</span> <span class="ident">::std::convert::From</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>)
     };
     <span class="comment">// convert range/index and step into SliceOrIndex</span>
     (@<span class="ident">convert</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">SliceOrIndex</span> <span class="kw">as</span> ::<span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">From</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>).<span class="ident">step_by</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span> <span class="kw">as</span> <span class="ident">isize</span>)
+        <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::SliceOrIndex</span> <span class="kw">as</span> <span class="ident">::std::convert::From</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::from</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>).<span class="ident">step_by</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">s</span> <span class="kw">as</span> <span class="ident">isize</span>)
     };
     ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="comment">// The extra `*&amp;` is a workaround for this compiler bug:</span>
         <span class="comment">// https://github.com/rust-lang/rust/issues/23014</span>
-        <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro">s</span><span class="macro">!</span>[@<span class="macro-nonterminal">parse</span> ::<span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="macro-nonterminal">Ix0</span><span class="op">&gt;</span>, [] $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>)<span class="kw-2">*</span>]
+        <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro">crate::s!</span>[@<span class="macro-nonterminal">parse</span> <span class="ident">::std::marker::PhantomData</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Ix0</span><span class="op">&gt;</span>, [] $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>)<span class="kw-2">*</span>]
     };
 );
 
@@ -1363,7 +1359,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if performing any individual slice panics or if the slices</span>
     <span class="doccomment">/// are not disjoint (i.e. if they intersect).</span>
-    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span>;
+    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="ident">MultiSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="kw">for</span> ()
@@ -1373,10 +1369,10 @@
 {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> ();
 
-    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {}
+    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {}
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>, <span class="ident">Do0</span><span class="op">&gt;</span> <span class="ident">MultiSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">SliceInfo</span><span class="op">&lt;</span><span class="ident">D</span>::<span class="ident">SliceArg</span>, <span class="ident">Do0</span><span class="op">&gt;</span>,)
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>, <span class="ident">Do0</span><span class="op">&gt;</span> <span class="ident">MultiSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">SliceInfo</span><span class="op">&lt;</span><span class="ident">D::SliceArg</span>, <span class="ident">Do0</span><span class="op">&gt;</span>,)
 <span class="kw">where</span>
     <span class="ident">A</span>: <span class="lifetime">&#39;a</span>,
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
@@ -1384,17 +1380,17 @@
 {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> (<span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">Do0</span><span class="op">&gt;</span>,);
 
-    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
         (<span class="ident">view</span>.<span class="ident">slice_move</span>(<span class="self">self</span>.<span class="number">0</span>),)
     }
 }
 
-<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">impl_multislice_tuple</span> {
+<span class="macro">macro_rules!</span> <span class="ident">impl_multislice_tuple</span> {
     ([$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">but_last</span>:<span class="ident">ident</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">last</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="macro">impl_multislice_tuple</span><span class="macro">!</span>(@<span class="ident">def_impl</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">but_last</span>,)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">last</span>,), [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">but_last</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">last</span>);
+        <span class="macro">impl_multislice_tuple!</span>(@<span class="ident">def_impl</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">but_last</span>,)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">last</span>,), [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">but_last</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">last</span>);
     };
     (@<span class="ident">def_impl</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span>:<span class="ident">ident</span>,)<span class="kw-2">*</span>), [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">but_last</span>:<span class="ident">ident</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">last</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
-        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">MultiSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="kw">for</span> ($(<span class="kw-2">&amp;</span><span class="ident">SliceInfo</span><span class="op">&lt;</span><span class="ident">D</span>::<span class="ident">SliceArg</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span><span class="op">&gt;</span>,)<span class="kw-2">*</span>)
+        <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span>,)<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">MultiSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="kw">for</span> ($(<span class="kw-2">&amp;</span><span class="ident">SliceInfo</span><span class="op">&lt;</span><span class="ident">D::SliceArg</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span><span class="op">&gt;</span>,)<span class="kw-2">*</span>)
         <span class="kw">where</span>
             <span class="ident">A</span>: <span class="lifetime">&#39;a</span>,
             <span class="ident">D</span>: <span class="ident">Dimension</span>,
@@ -1402,12 +1398,12 @@
         {
             <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> ($(<span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span><span class="op">&gt;</span>,)<span class="kw-2">*</span>);
 
-            <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+            <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
                 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
                 <span class="kw">let</span> ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span>,)<span class="kw-2">*</span>) <span class="op">=</span> <span class="self">self</span>;
 
                 <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="ident">view</span>.<span class="ident">raw_dim</span>();
-                <span class="macro">assert</span><span class="macro">!</span>(<span class="op">!</span><span class="macro">impl_multislice_tuple</span><span class="macro">!</span>(@<span class="ident">intersects_self</span> <span class="kw-2">&amp;</span><span class="ident">shape</span>, ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span>,)<span class="kw-2">*</span>)));
+                <span class="macro">assert!</span>(<span class="op">!</span><span class="macro">impl_multislice_tuple!</span>(@<span class="ident">intersects_self</span> <span class="kw-2">&amp;</span><span class="ident">shape</span>, ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">all</span>,)<span class="kw-2">*</span>)));
 
                 <span class="kw">let</span> <span class="ident">raw_view</span> <span class="op">=</span> <span class="ident">view</span>.<span class="ident">into_raw_view_mut</span>();
                 <span class="kw">unsafe</span> {
@@ -1424,15 +1420,15 @@
     };
     (@<span class="ident">intersects_self</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>:<span class="ident">expr</span>, (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">head</span>:<span class="ident">expr</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>:<span class="ident">expr</span>,)<span class="kw-2">*</span>)) <span class="op">=</span><span class="op">&gt;</span> {
         $(<span class="ident">slices_intersect</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">head</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>)) <span class="op">|</span><span class="op">|</span><span class="op">*</span>
-            <span class="op">|</span><span class="op">|</span> <span class="macro">impl_multislice_tuple</span><span class="macro">!</span>(@<span class="ident">intersects_self</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>, ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>,)<span class="kw-2">*</span>))
+            <span class="op">|</span><span class="op">|</span> <span class="macro">impl_multislice_tuple!</span>(@<span class="ident">intersects_self</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>, ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tail</span>,)<span class="kw-2">*</span>))
     };
 }
 
-<span class="macro">impl_multislice_tuple</span><span class="macro">!</span>([<span class="ident">Do0</span>] <span class="ident">Do1</span>);
-<span class="macro">impl_multislice_tuple</span><span class="macro">!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span>] <span class="ident">Do2</span>);
-<span class="macro">impl_multislice_tuple</span><span class="macro">!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span> <span class="ident">Do2</span>] <span class="ident">Do3</span>);
-<span class="macro">impl_multislice_tuple</span><span class="macro">!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span> <span class="ident">Do2</span> <span class="ident">Do3</span>] <span class="ident">Do4</span>);
-<span class="macro">impl_multislice_tuple</span><span class="macro">!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span> <span class="ident">Do2</span> <span class="ident">Do3</span> <span class="ident">Do4</span>] <span class="ident">Do5</span>);
+<span class="macro">impl_multislice_tuple!</span>([<span class="ident">Do0</span>] <span class="ident">Do1</span>);
+<span class="macro">impl_multislice_tuple!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span>] <span class="ident">Do2</span>);
+<span class="macro">impl_multislice_tuple!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span> <span class="ident">Do2</span>] <span class="ident">Do3</span>);
+<span class="macro">impl_multislice_tuple!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span> <span class="ident">Do2</span> <span class="ident">Do3</span>] <span class="ident">Do4</span>);
+<span class="macro">impl_multislice_tuple!</span>([<span class="ident">Do0</span> <span class="ident">Do1</span> <span class="ident">Do2</span> <span class="ident">Do3</span> <span class="ident">Do4</span>] <span class="ident">Do5</span>);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">MultiSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">T</span>
 <span class="kw">where</span>
@@ -1440,12 +1436,13 @@
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
     <span class="ident">T</span>: <span class="ident">MultiSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span>::<span class="ident">Output</span>;
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T::Output</span>;
 
-    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
-        <span class="ident">T</span>::<span class="ident">multi_slice_move</span>(<span class="self">self</span>, <span class="ident">view</span>)
+    <span class="kw">fn</span> <span class="ident">multi_slice_move</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">view</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+        <span class="ident">T::multi_slice_move</span>(<span class="self">self</span>, <span class="ident">view</span>)
     }
 }
-</pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ndarray" data-search-js="../../search-index.js"></div>
-    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script></body></html>
+</code></pre></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ndarray" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
+</body></html>
