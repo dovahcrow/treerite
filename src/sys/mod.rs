@@ -4,11 +4,18 @@ mod predictor;
 
 pub use self::bindings::{DMatrixHandle, PredictorHandle, PredictorOutputHandle};
 use self::bindings::{TreeliteGetLastError, TreeliteRegisterLogCallback};
-pub use self::dmatrix::{treelite_dmatrix_create_from_array, treelite_dmatrix_create_from_slice, treelite_dmatrix_create_from_csr_format, treelite_dmatrix_free, treelite_dmatrix_get_dimension, FloatInfo};
+pub use self::dmatrix::{
+    treelite_dmatrix_create_from_array, treelite_dmatrix_create_from_csr_format,
+    treelite_dmatrix_create_from_slice, treelite_dmatrix_free, treelite_dmatrix_get_dimension,
+    FloatInfo,
+};
 pub use self::predictor::{
-    treelite_create_predictor_output_vector, treelite_delete_predictor_output_vector, treelite_predictor_free, treelite_predictor_load, treelite_predictor_predict_batch,
-    treelite_predictor_query_global_bias, treelite_predictor_query_leaf_output_type, treelite_predictor_query_num_class, treelite_predictor_query_num_feature,
-    treelite_predictor_query_pred_transform, treelite_predictor_query_result_size, treelite_predictor_query_sigmoid_alpha, treelite_predictor_query_threshold_type,
+    treelite_create_predictor_output_vector, treelite_delete_predictor_output_vector,
+    treelite_predictor_free, treelite_predictor_load, treelite_predictor_predict_batch,
+    treelite_predictor_query_global_bias, treelite_predictor_query_leaf_output_type,
+    treelite_predictor_query_num_class, treelite_predictor_query_num_feature,
+    treelite_predictor_query_pred_transform, treelite_predictor_query_result_size,
+    treelite_predictor_query_sigmoid_alpha, treelite_predictor_query_threshold_type,
 };
 use crate::errors::TreeRiteError;
 use fehler::{throw, throws};
@@ -82,7 +89,9 @@ impl TryInto<DataType> for &'static CStr {
         } else if self == DTYPE_UINT32 {
             Ok(DataType::UInt32)
         } else {
-            throw!(TreeRiteError::UnknownDataTypeString(self.to_string_lossy().to_owned().to_string()))
+            throw!(TreeRiteError::UnknownDataTypeString(
+                self.to_string_lossy().to_owned().to_string()
+            ))
         }
     }
 }

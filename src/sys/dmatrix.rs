@@ -1,5 +1,8 @@
-use super::bindings::{DMatrixHandle, TreeliteDMatrixCreateFromMat, TreeliteDMatrixCreateFromCSR, TreeliteDMatrixFree, TreeliteDMatrixGetDimension};
 use super::bindings::size_t;
+use super::bindings::{
+    DMatrixHandle, TreeliteDMatrixCreateFromCSR, TreeliteDMatrixCreateFromMat, TreeliteDMatrixFree,
+    TreeliteDMatrixGetDimension,
+};
 use super::{DataType, RetCodeCheck};
 use crate::errors::TreeRiteError;
 use fehler::{throw, throws};
@@ -31,7 +34,9 @@ impl FloatInfo for f32 {
 }
 
 #[throws(TreeRiteError)]
-pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayView<'a, F, Ix2>) -> DMatrixHandle {
+pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(
+    data: ArrayView<'a, F, Ix2>,
+) -> DMatrixHandle {
     if !data.is_standard_layout() {
         throw!(TreeRiteError::DataNotCContiguous);
     }
@@ -51,7 +56,9 @@ pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(data: ArrayV
 }
 
 #[throws(TreeRiteError)]
-pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(data: &'a [T]) -> DMatrixHandle {
+pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(
+    data: &'a [T],
+) -> DMatrixHandle {
     let mut out = null_mut();
     unsafe {
         TreeliteDMatrixCreateFromMat(
@@ -74,7 +81,7 @@ pub fn treelite_dmatrix_create_from_csr_format<'a, T: Float + FloatInfo>(
     data: &'a [T],
     num_row: u64,
     num_col: u64,
-) -> DMatrixHandle{
+) -> DMatrixHandle {
     let mut out = null_mut();
     unsafe {
         TreeliteDMatrixCreateFromCSR(
@@ -86,7 +93,8 @@ pub fn treelite_dmatrix_create_from_csr_format<'a, T: Float + FloatInfo>(
             num_col,
             &mut out,
         )
-    }.check()?;
+    }
+    .check()?;
     out
 }
 

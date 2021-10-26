@@ -38,7 +38,7 @@ fn dmatrix_from_2darray() {
 }
 
 #[test]
-fn dmatrix_from_csr_format(){
+fn dmatrix_from_csr_format() {
     // this sample is from https://en.wikipedia.org/wiki/Sparse_matrix#Compressed_sparse_row_(CSR,_CRS_or_Yale_format)
     let data = vec![10f32, 20f32, 30f32, 40f32, 50f32, 60f32, 70f32, 80f32];
     let indices = vec![0, 1, 1, 3, 2, 3, 4, 5];

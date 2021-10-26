@@ -1,7 +1,11 @@
 use super::bindings::{
-    DMatrixHandle, PredictorHandle, PredictorOutputHandle, TreeliteCreatePredictorOutputVector, TreeliteDeletePredictorOutputVector, TreelitePredictorFree, TreelitePredictorLoad,
-    TreelitePredictorPredictBatch, TreelitePredictorQueryGlobalBias, TreelitePredictorQueryLeafOutputType, TreelitePredictorQueryNumClass, TreelitePredictorQueryNumFeature,
-    TreelitePredictorQueryPredTransform, TreelitePredictorQueryResultSize, TreelitePredictorQuerySigmoidAlpha, TreelitePredictorQueryThresholdType,
+    DMatrixHandle, PredictorHandle, PredictorOutputHandle, TreeliteCreatePredictorOutputVector,
+    TreeliteDeletePredictorOutputVector, TreelitePredictorFree, TreelitePredictorLoad,
+    TreelitePredictorPredictBatch, TreelitePredictorQueryGlobalBias,
+    TreelitePredictorQueryLeafOutputType, TreelitePredictorQueryNumClass,
+    TreelitePredictorQueryNumFeature, TreelitePredictorQueryPredTransform,
+    TreelitePredictorQueryResultSize, TreelitePredictorQuerySigmoidAlpha,
+    TreelitePredictorQueryThresholdType,
 };
 use super::{DataType, RetCodeCheck};
 use crate::errors::TreeRiteError;
@@ -17,7 +21,8 @@ pub fn treelite_predictor_load(library_path: &Path, num_worker_thread: usize) ->
     let library_path = CString::new(library_path.to_string_lossy().to_owned().to_string())?;
     let mut out = null_mut();
 
-    unsafe { TreelitePredictorLoad(library_path.as_ptr(), num_worker_thread as c_int, &mut out) }.check()?;
+    unsafe { TreelitePredictorLoad(library_path.as_ptr(), num_worker_thread as c_int, &mut out) }
+        .check()?;
 
     out
 }
@@ -28,13 +33,28 @@ pub fn treelite_predictor_free(handle: PredictorHandle) {
 }
 
 #[throws(TreeRiteError)]
-pub fn treelite_predictor_predict_batch(handle: PredictorHandle, batch: DMatrixHandle, verbose: bool, pred_margin: bool) -> (PredictorOutputHandle, u64) {
+pub fn treelite_predictor_predict_batch(
+    handle: PredictorHandle,
+    batch: DMatrixHandle,
+    verbose: bool,
+    pred_margin: bool,
+) -> (PredictorOutputHandle, u64) {
     let verbose = if verbose { 1 } else { 0 };
     let pred_margin = if pred_margin { 1 } else { 0 };
     let output_result = treelite_create_predictor_output_vector(handle, batch)?;
     let mut out_result_size = 0;
 
-    unsafe { TreelitePredictorPredictBatch(handle, batch, verbose, pred_margin, output_result, &mut out_result_size) }.check()?;
+    unsafe {
+        TreelitePredictorPredictBatch(
+            handle,
+            batch,
+            verbose,
+            pred_margin,
+            output_result,
+            &mut out_result_size,
+        )
+    }
+    .check()?;
 
     (output_result, out_result_size)
 }
@@ -98,7 +118,10 @@ pub fn treelite_predictor_query_pred_transform(handle: PredictorHandle) -> Strin
 
     unsafe { TreelitePredictorQueryPredTransform(handle, &mut out) }.check()?;
 
-    unsafe { CStr::from_ptr(out) }.to_string_lossy().to_owned().to_string()
+    unsafe { CStr::from_ptr(out) }
+        .to_string_lossy()
+        .to_owned()
+        .to_string()
 }
 
 #[throws(TreeRiteError)]
@@ -107,11 +130,17 @@ pub fn treelite_predictor_query_threshold_type(handle: PredictorHandle) -> Strin
 
     unsafe { TreelitePredictorQueryThresholdType(handle, &mut out) }.check()?;
 
-    unsafe { CStr::from_ptr(out) }.to_string_lossy().to_owned().to_string()
+    unsafe { CStr::from_ptr(out) }
+        .to_string_lossy()
+        .to_owned()
+        .to_string()
 }
 
 #[throws(TreeRiteError)]
-pub fn treelite_create_predictor_output_vector(handle: PredictorHandle, batch: DMatrixHandle) -> PredictorOutputHandle {
+pub fn treelite_create_predictor_output_vector(
+    handle: PredictorHandle,
+    batch: DMatrixHandle,
+) -> PredictorOutputHandle {
     let mut out = null_mut();
 
     unsafe { TreeliteCreatePredictorOutputVector(handle, batch, &mut out) }.check()?;
@@ -120,6 +149,9 @@ pub fn treelite_create_predictor_output_vector(handle: PredictorHandle, batch: D
 }
 
 #[throws(TreeRiteError)]
-pub fn treelite_delete_predictor_output_vector(handle: PredictorHandle, output_vector: PredictorOutputHandle) {
+pub fn treelite_delete_predictor_output_vector(
+    handle: PredictorHandle,
+    output_vector: PredictorOutputHandle,
+) {
     unsafe { TreeliteDeletePredictorOutputVector(handle, output_vector) }.check()?;
 }

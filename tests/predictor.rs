@@ -25,7 +25,9 @@ fn query_result_size() {
         [6.5, 2.8, 4.6, 1.5]
     ];
     assert_eq!(
-        model.result_size(&DMatrix::from_2darray(&feats).unwrap()).unwrap(),
+        model
+            .result_size(&DMatrix::from_2darray(&feats).unwrap())
+            .unwrap(),
         feats.nrows() as u64 * model.num_class().unwrap()
     );
 }
@@ -72,9 +74,14 @@ fn single_row_predict() {
 
     let feat = vec![5.4, 3.7, 1.5, 0.2];
 
-    let pred: Array2<f64> = model.predict_batch(&DMatrix::from_slice(&feat).unwrap(), false, false).unwrap();
+    let pred: Array2<f64> = model
+        .predict_batch(&DMatrix::from_slice(&feat).unwrap(), false, false)
+        .unwrap();
 
-    assert_eq!(pred, array![[0.7979739007026813, 0.1002914545900944, 0.10173464470722438]]);
+    assert_eq!(
+        pred,
+        array![[0.7979739007026813, 0.1002914545900944, 0.10173464470722438]]
+    );
 }
 
 #[test]
@@ -106,7 +113,9 @@ fn multi_row_predict() {
         [6.5, 2.8, 4.6, 1.5]
     ];
 
-    let pred: Array2<f64> = model.predict_batch(&DMatrix::from_2darray(&feat).unwrap(), false, false).unwrap();
+    let pred: Array2<f64> = model
+        .predict_batch(&DMatrix::from_2darray(&feat).unwrap(), false, false)
+        .unwrap();
 
     assert_eq!(
         pred,
