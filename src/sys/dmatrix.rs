@@ -45,8 +45,8 @@ pub fn treelite_dmatrix_create_from_array<'a, F: Float + FloatInfo>(
         TreeliteDMatrixCreateFromMat(
             data.as_ptr() as *const c_void,
             Into::<&'static CStr>::into(F::DATA_TYPE).as_ptr(),
-            data.nrows() as u64,
-            data.ncols() as u64,
+            data.nrows() as u64 as size_t,
+            data.ncols() as u64 as size_t,
             &F::MISSING as *const F as *const c_void,
             &mut out,
         )
@@ -65,7 +65,7 @@ pub fn treelite_dmatrix_create_from_slice<'a, T: Float + FloatInfo>(
             data.as_ptr() as *const c_void,
             Into::<&'static CStr>::into(T::DATA_TYPE).as_ptr(),
             1,
-            data.len() as u64,
+            data.len() as u64 as size_t,
             &T::MISSING as *const T as *const c_void,
             &mut out,
         )
@@ -89,8 +89,8 @@ pub fn treelite_dmatrix_create_from_csr_format<'a, T: Float + FloatInfo>(
             Into::<&'static CStr>::into(T::DATA_TYPE).as_ptr(),
             indices.as_ptr() as *const u32,
             headers.as_ptr() as *const size_t,
-            num_row,
-            num_col,
+            num_row as size_t,
+            num_col as size_t,
             &mut out,
         )
     }
@@ -127,5 +127,5 @@ pub fn treelite_dmatrix_get_dimension(handle: DMatrixHandle) -> (u64, u64, u64) 
 
     unsafe { TreeliteDMatrixGetDimension(handle, &mut nrow, &mut ncol, &mut nelem) }.check()?;
 
-    (nrow, ncol, nelem)
+    (nrow as u64, ncol as u64, nelem as u64)
 }
