@@ -56,7 +56,7 @@ pub fn treelite_predictor_predict_batch(
     }
     .check()?;
 
-    (output_result, out_result_size)
+    (output_result, out_result_size as u64)
 }
 
 #[throws(TreeRiteError)]
@@ -73,7 +73,7 @@ pub fn treelite_predictor_query_num_class(handle: PredictorHandle) -> u64 {
     let mut out = 0;
 
     unsafe { TreelitePredictorQueryNumClass(handle, &mut out) }.check()?;
-    out
+    out as u64
 }
 
 #[throws(TreeRiteError)]
@@ -82,7 +82,7 @@ pub fn treelite_predictor_query_result_size(handle: PredictorHandle, batch: DMat
 
     unsafe { TreelitePredictorQueryResultSize(handle, batch, &mut out) }.check()?;
 
-    out
+    out as u64
 }
 
 #[throws(TreeRiteError)]
@@ -91,7 +91,7 @@ pub fn treelite_predictor_query_num_feature(handle: PredictorHandle) -> u64 {
 
     unsafe { TreelitePredictorQueryNumFeature(handle, &mut out) }.check()?;
 
-    out
+    out as u64
 }
 
 #[throws(TreeRiteError)]
