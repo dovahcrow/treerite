@@ -304,7 +304,7 @@
     <span class="doccomment">/// Unsafe because caller is responsible for ensuring that the array will</span>
     <span class="doccomment">/// meet all of the invariants of the `ArrayBase` type.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">RawArrayView</span> {
             <span class="ident">data</span>: <span class="ident">RawViewRepr::new</span>(),
             <span class="ident">ptr</span>,
@@ -313,7 +313,7 @@
         }
     }
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">A</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">A</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">nonnull_debug_checked_from_ptr</span>(<span class="ident">ptr</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">A</span>), <span class="ident">dim</span>, <span class="ident">strides</span>)
     }
 
@@ -352,7 +352,7 @@
     <span class="doccomment">/// * The product of non-zero axis lengths must not exceed `isize::MAX`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`.offset()`]: https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_shape_ptr</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_shape_ptr</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">A</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">StrideShape</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
@@ -375,7 +375,7 @@
     <span class="doccomment">/// data is valid, ensure that the pointer is aligned, and choose the</span>
     <span class="doccomment">/// correct lifetime.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">deref_into_view</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">deref_into_view</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
         <span class="macro">debug_assert!</span>(
             <span class="ident">is_aligned</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>()),
             <span class="string">&quot;The pointer must be aligned.&quot;</span>
@@ -387,10 +387,10 @@
     <span class="doccomment">/// before the split and one array pointer after the split.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if `axis` or `index` is out of bounds.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_at</span>(<span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="ident">index</span>: <span class="ident">Ix</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="self">Self</span>, <span class="self">Self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_at</span>(<span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="ident">index</span>: <span class="ident">Ix</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
         <span class="macro">assert!</span>(<span class="ident">index</span> <span class="op">&lt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len_of</span>(<span class="ident">axis</span>));
         <span class="kw">let</span> <span class="ident">left_ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>();
-        <span class="kw">let</span> <span class="ident">right_ptr</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">index</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">len_of</span>(<span class="ident">axis</span>) {
+        <span class="kw">let</span> <span class="ident">right_ptr</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">index</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">len_of</span>(<span class="ident">axis</span>) {
             <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>()
         } <span class="kw">else</span> {
             <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">stride_offset</span>(<span class="ident">index</span>, <span class="self">self</span>.<span class="ident">strides</span>.<span class="ident">axis</span>(<span class="ident">axis</span>));
@@ -420,7 +420,7 @@
     <span class="doccomment">/// While this method is safe, for the same reason as regular raw pointer</span>
     <span class="doccomment">/// casts are safe, access through the produced raw view is only possible</span>
     <span class="doccomment">/// in an unsafe block or function.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawArrayView</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">D</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">RawArrayView</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">D</span><span class="op">&gt;</span> {
         <span class="macro">assert_eq!</span>(
             <span class="ident">mem::size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(),
             <span class="ident">mem::size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>(),
@@ -440,7 +440,7 @@
     <span class="doccomment">/// Unsafe because caller is responsible for ensuring that the array will</span>
     <span class="doccomment">/// meet all of the invariants of the `ArrayBase` type.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">RawArrayViewMut</span> {
             <span class="ident">data</span>: <span class="ident">RawViewRepr::new</span>(),
             <span class="ident">ptr</span>,
@@ -449,7 +449,7 @@
         }
     }
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">A</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new_</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">A</span>, <span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">nonnull_debug_checked_from_ptr</span>(<span class="ident">ptr</span>), <span class="ident">dim</span>, <span class="ident">strides</span>)
     }
 
@@ -488,7 +488,7 @@
     <span class="doccomment">/// * The product of non-zero axis lengths must not exceed `isize::MAX`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`.offset()`]: https://doc.rust-lang.org/stable/std/primitive.pointer.html#method.offset</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_shape_ptr</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_shape_ptr</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">A</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">StrideShape</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
@@ -504,7 +504,7 @@
 
     <span class="doccomment">/// Converts to a non-mutable `RawArrayView`.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">into_raw_view</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">into_raw_view</span>(<span class="self">self</span>) -&gt; <span class="ident">RawArrayView</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> { <span class="ident">RawArrayView::new</span>(<span class="self">self</span>.<span class="ident">ptr</span>, <span class="self">self</span>.<span class="ident">dim</span>, <span class="self">self</span>.<span class="ident">strides</span>) }
     }
 
@@ -517,7 +517,7 @@
     <span class="doccomment">/// data is valid, ensure that the pointer is aligned, and choose the</span>
     <span class="doccomment">/// correct lifetime.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">deref_into_view</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">deref_into_view</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
         <span class="macro">debug_assert!</span>(
             <span class="ident">is_aligned</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>()),
             <span class="string">&quot;The pointer must be aligned.&quot;</span>
@@ -534,7 +534,7 @@
     <span class="doccomment">/// data is valid, ensure that the pointer is aligned, and choose the</span>
     <span class="doccomment">/// correct lifetime.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">deref_into_view_mut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">deref_into_view_mut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> {
         <span class="macro">debug_assert!</span>(
             <span class="ident">is_aligned</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>()),
             <span class="string">&quot;The pointer must be aligned.&quot;</span>
@@ -546,7 +546,7 @@
     <span class="doccomment">/// before the split and one array pointer after the split.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if `axis` or `index` is out of bounds.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_at</span>(<span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="ident">index</span>: <span class="ident">Ix</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="self">Self</span>, <span class="self">Self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_at</span>(<span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>, <span class="ident">index</span>: <span class="ident">Ix</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
         <span class="kw">let</span> (<span class="ident">left</span>, <span class="ident">right</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">into_raw_view</span>().<span class="ident">split_at</span>(<span class="ident">axis</span>, <span class="ident">index</span>);
         <span class="kw">unsafe</span> {
             (
@@ -566,7 +566,7 @@
     <span class="doccomment">/// While this method is safe, for the same reason as regular raw pointer</span>
     <span class="doccomment">/// casts are safe, access through the produced raw view is only possible</span>
     <span class="doccomment">/// in an unsafe block or function.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RawArrayViewMut</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">D</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cast</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(<span class="self">self</span>) -&gt; <span class="ident">RawArrayViewMut</span><span class="op">&lt;</span><span class="ident">B</span>, <span class="ident">D</span><span class="op">&gt;</span> {
         <span class="macro">assert_eq!</span>(
             <span class="ident">mem::size_of</span>::<span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span>(),
             <span class="ident">mem::size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>(),

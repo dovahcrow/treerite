@@ -174,7 +174,7 @@
 <span class="kw">use</span> <span class="ident">std::ptr</span>::{<span class="ident">null</span>, <span class="ident">null_mut</span>};
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_load</span>(<span class="ident">library_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">num_worker_thread</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PredictorHandle</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_load</span>(<span class="ident">library_path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">num_worker_thread</span>: <span class="ident">usize</span>) -&gt; <span class="ident">PredictorHandle</span> {
     <span class="kw">let</span> <span class="ident">library_path</span> <span class="op">=</span> <span class="ident">CString::new</span>(<span class="ident">library_path</span>.<span class="ident">to_string_lossy</span>().<span class="ident">to_owned</span>().<span class="ident">to_string</span>())<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">null_mut</span>();
 
@@ -195,7 +195,7 @@
     <span class="ident">batch</span>: <span class="ident">DMatrixHandle</span>,
     <span class="ident">verbose</span>: <span class="ident">bool</span>,
     <span class="ident">pred_margin</span>: <span class="ident">bool</span>,
-) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">PredictorOutputHandle</span>, <span class="ident">u64</span>) {
+) -&gt; (<span class="ident">PredictorOutputHandle</span>, <span class="ident">u64</span>) {
     <span class="kw">let</span> <span class="ident">verbose</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">verbose</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> };
     <span class="kw">let</span> <span class="ident">pred_margin</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">pred_margin</span> { <span class="number">1</span> } <span class="kw">else</span> { <span class="number">0</span> };
     <span class="kw">let</span> <span class="ident">output_result</span> <span class="op">=</span> <span class="ident">treelite_create_predictor_output_vector</span>(<span class="ident">handle</span>, <span class="ident">batch</span>)<span class="question-mark">?</span>;
@@ -213,11 +213,11 @@
     }
     .<span class="ident">check</span>()<span class="question-mark">?</span>;
 
-    (<span class="ident">output_result</span>, <span class="ident">out_result_size</span>)
+    (<span class="ident">output_result</span>, <span class="ident">out_result_size</span> <span class="kw">as</span> <span class="ident">u64</span>)
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_leaf_output_type</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DataType</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_leaf_output_type</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) -&gt; <span class="ident">DataType</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">null</span>();
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQueryLeafOutputType</span>(<span class="ident">handle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
@@ -226,33 +226,33 @@
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_num_class</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_num_class</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="number">0</span>;
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQueryNumClass</span>(<span class="ident">handle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
-    <span class="ident">out</span>
+    <span class="ident">out</span> <span class="kw">as</span> <span class="ident">u64</span>
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_result_size</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>, <span class="ident">batch</span>: <span class="ident">DMatrixHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_result_size</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>, <span class="ident">batch</span>: <span class="ident">DMatrixHandle</span>) -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="number">0</span>;
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQueryResultSize</span>(<span class="ident">handle</span>, <span class="ident">batch</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
 
-    <span class="ident">out</span>
+    <span class="ident">out</span> <span class="kw">as</span> <span class="ident">u64</span>
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_num_feature</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_num_feature</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="number">0</span>;
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQueryNumFeature</span>(<span class="ident">handle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
 
-    <span class="ident">out</span>
+    <span class="ident">out</span> <span class="kw">as</span> <span class="ident">u64</span>
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_global_bias</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_global_bias</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) -&gt; <span class="ident">f32</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="number">0.</span>;
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQueryGlobalBias</span>(<span class="ident">handle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
@@ -261,7 +261,7 @@
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_sigmoid_alpha</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_sigmoid_alpha</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) -&gt; <span class="ident">f32</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="number">0.</span>;
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQuerySigmoidAlpha</span>(<span class="ident">handle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
@@ -270,7 +270,7 @@
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_pred_transform</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_pred_transform</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) -&gt; <span class="ident">String</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">null</span>();
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQueryPredTransform</span>(<span class="ident">handle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
@@ -282,7 +282,7 @@
 }
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_threshold_type</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_predictor_query_threshold_type</span>(<span class="ident">handle</span>: <span class="ident">PredictorHandle</span>) -&gt; <span class="ident">String</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">null</span>();
 
     <span class="kw">unsafe</span> { <span class="ident">TreelitePredictorQueryThresholdType</span>(<span class="ident">handle</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;
@@ -297,7 +297,7 @@
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">treelite_create_predictor_output_vector</span>(
     <span class="ident">handle</span>: <span class="ident">PredictorHandle</span>,
     <span class="ident">batch</span>: <span class="ident">DMatrixHandle</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PredictorOutputHandle</span> {
+) -&gt; <span class="ident">PredictorOutputHandle</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">out</span> <span class="op">=</span> <span class="ident">null_mut</span>();
 
     <span class="kw">unsafe</span> { <span class="ident">TreeliteCreatePredictorOutputVector</span>(<span class="ident">handle</span>, <span class="ident">batch</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) }.<span class="ident">check</span>()<span class="question-mark">?</span>;

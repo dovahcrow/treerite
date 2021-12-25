@@ -194,7 +194,7 @@
     <span class="doccomment">/// let model = Predictor::load(&quot;examples/iris.so&quot;, 1).unwrap();</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="ident">library_path</span>: <span class="ident">P</span>, <span class="ident">num_worker_thread</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Predictor</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">load</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="ident">library_path</span>: <span class="ident">P</span>, <span class="ident">num_worker_thread</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Predictor</span>
     <span class="kw">where</span>
         <span class="ident">P</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
     {
@@ -222,7 +222,7 @@
         <span class="ident">dmatrix</span>: <span class="kw-2">&amp;</span><span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
         <span class="ident">verbose</span>: <span class="ident">bool</span>,
         <span class="ident">pred_margin</span>: <span class="ident">bool</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Array2</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>
+    ) -&gt; <span class="ident">Array2</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">O</span>: <span class="ident">Float</span> <span class="op">+</span> <span class="ident">FloatInfo</span>,
         <span class="ident">F</span>: <span class="ident">Float</span> <span class="op">+</span> <span class="ident">FloatInfo</span>,
@@ -247,47 +247,47 @@
 
     <span class="doccomment">/// Get the output type of the leaves.</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">leaf_output_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DataType</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">leaf_output_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">DataType</span> {
         <span class="ident">treelite_predictor_query_leaf_output_type</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 
     <span class="doccomment">/// Get how many classes this model output</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">num_class</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">num_class</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="ident">treelite_predictor_query_num_class</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 
     <span class="doccomment">/// Get the output result size (num instances x num classes) given a DMatrix</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">result_size</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">batch</span>: <span class="kw-2">&amp;</span><span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">result_size</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">batch</span>: <span class="kw-2">&amp;</span><span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>) -&gt; <span class="ident">u64</span> {
         <span class="ident">treelite_predictor_query_result_size</span>(<span class="self">self</span>.<span class="ident">handle</span>, <span class="ident">batch</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 
     <span class="doccomment">/// Get the number of features this model required</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">num_feature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">num_feature</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="ident">treelite_predictor_query_num_feature</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 
     <span class="doccomment">/// Get the global bias of the model</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">global_bias</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">global_bias</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
         <span class="ident">treelite_predictor_query_global_bias</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 
     <span class="doccomment">/// Get the sigmoid alpha of the model</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sigmod_alpha</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sigmod_alpha</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span> {
         <span class="ident">treelite_predictor_query_sigmoid_alpha</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pred_transform</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pred_transform</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
         <span class="ident">treelite_predictor_query_pred_transform</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">threshold_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">threshold_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span> {
         <span class="ident">treelite_predictor_query_threshold_type</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>
     }
 }
@@ -295,8 +295,8 @@
 <span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">Predictor</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">match</span> <span class="ident">treelite_predictor_free</span>(<span class="self">self</span>.<span class="ident">handle</span>) {
-            <span class="prelude-val">Ok</span>(()) <span class="op">=</span><span class="op">&gt;</span> {}
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Ok</span>(()) =&gt; {}
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
                 <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;free_panic&quot;</span>) {
                     <span class="macro">panic!</span>(<span class="string">&quot;cannot free predictor: {}&quot;</span>, <span class="ident">e</span>)
                 }

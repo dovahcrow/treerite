@@ -4,7 +4,7 @@ but you don’t need to wrap the successful return values in <code>Ok</code>.</p
 <p>Using this syntax, you can write fallible functions almost as if they were nonfallible. Every
 time a function call would return a <code>Result</code>, you “re-raise” the error using <code>?</code>, and if you
 wish to raise your own error, you can return it with the <code>throw!</code> macro.</p>
-<h2 id="example" class="section-header"><a href="#example">Example</a></h2>
+<h3 id="example" class="section-header"><a href="#example">Example</a></h3>
 <div class='information'><div class='tooltip should_panic'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered should_panic"><code><span class="kw">use</span> <span class="ident">std::io</span>::{<span class="self">self</span>, <span class="ident">Read</span>};
 
 <span class="kw">use</span> <span class="ident">fehler</span>::{<span class="ident">throw</span>, <span class="ident">throws</span>};
@@ -21,12 +21,12 @@ wish to raise your own error, you can return it with the <code>throw!</code> mac
 
     <span class="macro">println!</span>(<span class="string">&quot;Okay!&quot;</span>);
 }</code></pre></div>
-<h1 id="default-error-type" class="section-header"><a href="#default-error-type">Default Error Type</a></h1>
+<h2 id="default-error-type" class="section-header"><a href="#default-error-type">Default Error Type</a></h2>
 <p>This macro supports a “default error type” - if you do not pass a type to the macro, it will
 use the type named <code>Error</code> in this scope. So if you have defined an error type in this
 module, that will be the error thrown by this function.</p>
 <p>You can access this feature by omitting the arguments entirely or by passing <code>_</code> as the type.</p>
-<h2 id="example-1" class="section-header"><a href="#example-1">Example</a></h2>
+<h3 id="example-1" class="section-header"><a href="#example-1">Example</a></h3>
 <div class='information'><div class='tooltip should_panic'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered should_panic"><code><span class="kw">use</span> <span class="ident">fehler::throws</span>;
 
 <span class="comment">// Set the default error type for this module:</span>
@@ -37,22 +37,22 @@ module, that will be the error thrown by this function.</p>
    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">std::fs::read_to_string</span>(<span class="string">&quot;my_file.txt&quot;</span>)<span class="question-mark">?</span>;
    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">file</span>);
 }</code></pre></div>
-<h1 id="throwing-as-an-option" class="section-header"><a href="#throwing-as-an-option">Throwing as an Option</a></h1>
+<h2 id="throwing-as-an-option" class="section-header"><a href="#throwing-as-an-option">Throwing as an Option</a></h2>
 <p>This syntax can also support functions which return an <code>Option</code> instead of a <code>Result</code>. The
 way to access this is to pass <code>as Option</code> as the argument to <code>throw</code>.</p>
 <p>In functions that return <code>Option</code>, you can use the <code>throw!()</code> macro without any argument to
 return <code>None</code>.</p>
-<h2 id="example-2" class="section-header"><a href="#example-2">Example</a></h2>
+<h3 id="example-2" class="section-header"><a href="#example-2">Example</a></h3>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">fehler</span>::{<span class="ident">throw</span>, <span class="ident">throws</span>};
 
 <span class="attribute">#[<span class="ident">throws</span>(<span class="kw">as</span> <span class="prelude-ty">Option</span>)]</span>
-<span class="kw">fn</span> <span class="ident">example</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Ord</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>], <span class="ident">needle</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+<span class="kw">fn</span> <span class="ident">example</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Eq</span> <span class="op">+</span> <span class="ident">Ord</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>], <span class="ident">needle</span>: <span class="kw-2">&amp;</span><span class="ident">T</span>) -&gt; <span class="ident">usize</span> {
     <span class="kw">if</span> <span class="op">!</span><span class="ident">slice</span>.<span class="ident">contains</span>(<span class="ident">needle</span>) {
         <span class="macro">throw!</span>();
     }
     <span class="ident">slice</span>.<span class="ident">binary_search</span>(<span class="ident">needle</span>).<span class="ident">ok</span>()<span class="question-mark">?</span>
 }</code></pre></div>
-<h1 id="other-try-types" class="section-header"><a href="#other-try-types">Other <code>Try</code> types</a></h1>
+<h2 id="other-try-types" class="section-header"><a href="#other-try-types">Other <code>Try</code> types</a></h2>
 <p>The <code>?</code> syntax in Rust is controlled by a trait called <code>Try</code>, which is currently unstable.
 Because this feature is unstable and I don’t want to maintain compatibility if its interface
 changes, this crate currently only works with two stable <code>Try</code> types: Result and Option.

@@ -269,7 +269,7 @@
     <span class="doccomment">/// [1]: struct.ArrayBase.html#method.get</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if index is out of bounds.</span>
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span>;
+    <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span>;
 
     <span class="doccomment">/// Get a reference of a element through the view.</span>
     <span class="doccomment">///</span>
@@ -284,7 +284,7 @@
     <span class="doccomment">/// [2]: struct.ArrayBase.html#method.get_mut</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if index is out of bounds.</span>
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Output</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">get</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Output</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Get a reference of a element through the view without boundary check</span>
     <span class="doccomment">///</span>
@@ -301,7 +301,7 @@
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The caller must ensure that the index is in-bounds.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uget</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span>;
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uget</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span>;
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>, <span class="ident">I</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="ident">IndexLonger</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>
@@ -323,12 +323,12 @@
     <span class="doccomment">/// [1]: struct.ArrayBase.html#method.get</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if index is out of bounds.</span>
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">A</span> {
+    <span class="kw">fn</span> <span class="ident">index</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">A</span> {
         <span class="macro">debug_bounds_check!</span>(<span class="self">self</span>, <span class="ident">index</span>);
         <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">get_ptr</span>(<span class="ident">index</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">array_out_of_bounds</span>()) }
     }
 
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">A</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">get</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">A</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">get_ptr</span>(<span class="ident">index</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">ptr</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">ptr</span>) }
     }
 
@@ -343,7 +343,7 @@
     <span class="doccomment">/// [1]: struct.ArrayBase.html#method.uget</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Note:** only unchecked for non-debug builds of ndarray.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uget</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">A</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uget</span>(<span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">A</span> {
         <span class="macro">debug_bounds_check!</span>(<span class="self">self</span>, <span class="ident">index</span>);
         <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">as_ptr</span>().<span class="ident">offset</span>(<span class="ident">index</span>.<span class="ident">index_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">strides</span>))
     }
@@ -368,12 +368,12 @@
     <span class="doccomment">/// [1]: struct.ArrayBase.html#method.get_mut</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if index is out of bounds.</span>
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">A</span> {
+    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">A</span> {
         <span class="macro">debug_bounds_check!</span>(<span class="self">self</span>, <span class="ident">index</span>);
         <span class="kw">unsafe</span> {
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">get_ptr_mut</span>(<span class="ident">index</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">ptr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">ptr</span>,
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">array_out_of_bounds</span>(),
+                <span class="prelude-val">Some</span>(<span class="ident">ptr</span>) =&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">ptr</span>,
+                <span class="prelude-val">None</span> =&gt; <span class="ident">array_out_of_bounds</span>(),
             }
         }
     }
@@ -386,12 +386,12 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [1]: struct.ArrayBase.html#method.get_mut</span>
     <span class="doccomment">///</span>
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">A</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">A</span><span class="op">&gt;</span> {
         <span class="macro">debug_bounds_check!</span>(<span class="self">self</span>, <span class="ident">index</span>);
         <span class="kw">unsafe</span> {
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">get_ptr_mut</span>(<span class="ident">index</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">ptr</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">ptr</span>),
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+                <span class="prelude-val">Some</span>(<span class="ident">ptr</span>) =&gt; <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">ptr</span>),
+                <span class="prelude-val">None</span> =&gt; <span class="prelude-val">None</span>,
             }
         }
     }
@@ -405,7 +405,7 @@
     <span class="doccomment">/// [1]: struct.ArrayBase.html#method.uget_mut</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Note:** only unchecked for non-debug builds of ndarray.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uget</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">A</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uget</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">A</span> {
         <span class="macro">debug_bounds_check!</span>(<span class="self">self</span>, <span class="ident">index</span>);
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>
             .<span class="ident">as_mut_ptr</span>()

@@ -130,7 +130,7 @@
 {
     <span class="doccomment">/// Create a DMatrix from any type that can be converted to a 2d ndarray::ArrayView. This function is zero copy.</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_2darray</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="ident">array</span>: <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_2darray</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span><span class="op">&gt;</span>(<span class="ident">array</span>: <span class="ident">A</span>) -&gt; <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">AsArray</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span>, <span class="ident">Ix2</span><span class="op">&gt;</span>,
         <span class="ident">F</span>: <span class="lifetime">&#39;a</span>,
@@ -145,7 +145,7 @@
     <span class="doccomment">/// Create a single row DMatrix from a slice of floats. Useful for prediction for a single instance.</span>
     <span class="doccomment">/// This function is zero copy.</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">array</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">F</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">array</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">F</span>]) -&gt; <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
         <span class="ident">array</span>.<span class="ident">try_into</span>()<span class="question-mark">?</span>
     }
 
@@ -158,7 +158,7 @@
         <span class="ident">data</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">F</span>],
         <span class="ident">num_row</span>: <span class="ident">u64</span>,
         <span class="ident">num_col</span>: <span class="ident">u64</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span>
             <span class="ident">treelite_dmatrix_create_from_csr_format</span>(<span class="ident">headers</span>, <span class="ident">indices</span>, <span class="ident">data</span>, <span class="ident">num_row</span>, <span class="ident">num_col</span>)<span class="question-mark">?</span>;
         <span class="ident">DMatrix</span> {
@@ -171,13 +171,13 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Number of rows in this DMatrix</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nrows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nrows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="ident">treelite_dmatrix_get_dimension</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>.<span class="number">0</span>
     }
 
     <span class="doccomment">/// Number of columns in this DMatrix</span>
     <span class="attribute">#[<span class="ident">throws</span>(<span class="ident">TreeRiteError</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ncols</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ncols</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="ident">treelite_dmatrix_get_dimension</span>(<span class="self">self</span>.<span class="ident">handle</span>)<span class="question-mark">?</span>.<span class="number">1</span>
     }
 }
@@ -185,7 +185,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span>: <span class="ident">Float</span> <span class="op">+</span> <span class="ident">FloatInfo</span><span class="op">&gt;</span> <span class="ident">TryInto</span><span class="op">&lt;</span><span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">F</span>] {
     <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="ident">TreeRiteError</span>;
 
-    <span class="kw">fn</span> <span class="ident">try_into</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_into</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">treelite_dmatrix_create_from_slice</span>(<span class="self">self</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">DMatrix</span> {
             <span class="ident">handle</span>,
@@ -197,8 +197,8 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">DMatrix</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">match</span> <span class="ident">treelite_dmatrix_free</span>(<span class="self">self</span>.<span class="ident">handle</span>) {
-            <span class="prelude-val">Ok</span>(()) <span class="op">=</span><span class="op">&gt;</span> {}
-            <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Ok</span>(()) =&gt; {}
+            <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
                 <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;free_panic&quot;</span>) {
                     <span class="macro">panic!</span>(<span class="string">&quot;cannot free dmatrix: {}&quot;</span>, <span class="ident">e</span>)
                 }

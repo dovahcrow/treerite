@@ -155,55 +155,55 @@
 
 <span class="kw">impl</span> <span class="ident">Layout</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is</span>(<span class="self">self</span>, <span class="ident">flag</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is</span>(<span class="self">self</span>, <span class="ident">flag</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="number">0</span> <span class="op">&amp;</span> <span class="ident">flag</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Return layout common to both inputs</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">intersect</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Layout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">intersect</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Layout</span>) -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">&amp;</span> <span class="ident">other</span>.<span class="number">0</span>)
     }
 
     <span class="doccomment">/// Return a layout that simultaneously &quot;is&quot; what both of the inputs are</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">also</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Layout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">also</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">Layout</span>) -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">|</span> <span class="ident">other</span>.<span class="number">0</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">one_dimensional</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">one_dimensional</span>() -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout::c</span>().<span class="ident">also</span>(<span class="ident">Layout::f</span>())
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">c</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">c</span>() -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout</span>(<span class="ident">CORDER</span> <span class="op">|</span> <span class="ident">CPREFER</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">f</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">f</span>() -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout</span>(<span class="ident">FORDER</span> <span class="op">|</span> <span class="ident">FPREFER</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">cpref</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">cpref</span>() -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout</span>(<span class="ident">CPREFER</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">fpref</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">fpref</span>() -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout</span>(<span class="ident">FPREFER</span>)
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">none</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Layout</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">none</span>() -&gt; <span class="ident">Layout</span> {
         <span class="ident">Layout</span>(<span class="number">0</span>)
     }
 
     <span class="doccomment">/// A simple &quot;score&quot; method which scores positive for preferring C-order, negative for F-order</span>
     <span class="doccomment">/// Subject to change when we can describe other layouts</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">tendency</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">tendency</span>(<span class="self">self</span>) -&gt; <span class="ident">i32</span> {
         (<span class="self">self</span>.<span class="ident">is</span>(<span class="ident">CORDER</span>) <span class="kw">as</span> <span class="ident">i32</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">is</span>(<span class="ident">FORDER</span>) <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">+</span>
         (<span class="self">self</span>.<span class="ident">is</span>(<span class="ident">CPREFER</span>) <span class="kw">as</span> <span class="ident">i32</span> <span class="op">-</span> <span class="self">self</span>.<span class="ident">is</span>(<span class="ident">FPREFER</span>) <span class="kw">as</span> <span class="ident">i32</span>)
 

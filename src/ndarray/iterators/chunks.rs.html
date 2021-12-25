@@ -237,7 +237,7 @@
 
 <span class="macro">impl_ndproducer!</span> {
     [<span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Dimension</span>]
-    [<span class="ident">Clone</span> <span class="op">=</span><span class="op">&gt;</span> <span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Clone</span> ]
+    [<span class="ident">Clone</span> =&gt; <span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Clone</span> ]
     <span class="ident">ExactChunks</span> {
         <span class="ident">base</span>,
         <span class="ident">chunk</span>,
@@ -272,13 +272,13 @@
     <span class="doccomment">/// Creates a new exact chunks producer.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if any chunk dimension is zero</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">a</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">chunk</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">a</span>: <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">chunk</span>: <span class="ident">E</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">E</span>: <span class="ident">IntoDimension</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">chunk</span> <span class="op">=</span> <span class="ident">chunk</span>.<span class="ident">into_dimension</span>();
         <span class="macro">ndassert!</span>(
-            <span class="ident">a</span>.<span class="ident">ndim</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">chunk</span>.<span class="ident">ndim</span>(),
+            <span class="ident">a</span>.<span class="ident">ndim</span>() <span class="op">==</span> <span class="ident">chunk</span>.<span class="ident">ndim</span>(),
             <span class="macro">concat!</span>(
                 <span class="string">&quot;Chunk dimension {} does not match array dimension {} &quot;</span>,
                 <span class="string">&quot;(with array of shape {:?})&quot;</span>
@@ -308,7 +308,7 @@
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::IntoIter</span> <span class="kw">as</span> <span class="ident">Iterator</span><span class="op">&gt;</span><span class="ident">::Item</span>;
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">ExactChunksIter</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::IntoIter</span> {
         <span class="ident">ExactChunksIter</span> {
             <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">base</span>.<span class="ident">into_elements_base</span>(),
             <span class="ident">chunk</span>: <span class="self">self</span>.<span class="ident">chunk</span>,
@@ -329,7 +329,7 @@
 
 <span class="macro">impl_ndproducer!</span> {
     [<span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Dimension</span>]
-    [<span class="ident">Clone</span> <span class="op">=</span><span class="op">&gt;</span> ]
+    [<span class="ident">Clone</span> =&gt; ]
     <span class="ident">ExactChunksMut</span> {
         <span class="ident">base</span>,
         <span class="ident">chunk</span>,
@@ -362,13 +362,13 @@
     <span class="doccomment">/// Creates a new exact chunks producer.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if any chunk dimension is zero</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">a</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">chunk</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">a</span>: <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">chunk</span>: <span class="ident">E</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">E</span>: <span class="ident">IntoDimension</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">chunk</span> <span class="op">=</span> <span class="ident">chunk</span>.<span class="ident">into_dimension</span>();
         <span class="macro">ndassert!</span>(
-            <span class="ident">a</span>.<span class="ident">ndim</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">chunk</span>.<span class="ident">ndim</span>(),
+            <span class="ident">a</span>.<span class="ident">ndim</span>() <span class="op">==</span> <span class="ident">chunk</span>.<span class="ident">ndim</span>(),
             <span class="macro">concat!</span>(
                 <span class="string">&quot;Chunk dimension {} does not match array dimension {} &quot;</span>,
                 <span class="string">&quot;(with array of shape {:?})&quot;</span>
@@ -398,7 +398,7 @@
 {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::IntoIter</span> <span class="kw">as</span> <span class="ident">Iterator</span><span class="op">&gt;</span><span class="ident">::Item</span>;
     <span class="kw">type</span> <span class="ident">IntoIter</span> <span class="op">=</span> <span class="ident">ExactChunksIterMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::IntoIter</span> {
+    <span class="kw">fn</span> <span class="ident">into_iter</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::IntoIter</span> {
         <span class="ident">ExactChunksIterMut</span> {
             <span class="ident">iter</span>: <span class="self">self</span>.<span class="ident">base</span>.<span class="ident">into_elements_base</span>(),
             <span class="ident">chunk</span>: <span class="self">self</span>.<span class="ident">chunk</span>,
@@ -409,7 +409,7 @@
 
 <span class="macro">impl_iterator!</span> {
     [<span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Dimension</span>]
-    [<span class="ident">Clone</span> <span class="op">=</span><span class="op">&gt;</span> <span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Clone</span>]
+    [<span class="ident">Clone</span> =&gt; <span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Clone</span>]
     <span class="ident">ExactChunksIter</span> {
         <span class="ident">iter</span>,
         <span class="ident">chunk</span>,
@@ -431,7 +431,7 @@
 
 <span class="macro">impl_iterator!</span> {
     [<span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">D</span>: <span class="ident">Dimension</span>]
-    [<span class="ident">Clone</span> <span class="op">=</span><span class="op">&gt;</span> ]
+    [<span class="ident">Clone</span> =&gt; ]
     <span class="ident">ExactChunksIterMut</span> {
         <span class="ident">iter</span>,
         <span class="ident">chunk</span>,

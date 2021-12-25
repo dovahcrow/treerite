@@ -600,11 +600,11 @@
     <span class="ident">c</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">K::Elem</span>, <span class="ident">rsc</span>: <span class="ident">isize</span>, <span class="ident">csc</span>: <span class="ident">isize</span>)
     <span class="kw">where</span> <span class="ident">K</span>: <span class="ident">GemmKernel</span>
 {
-    <span class="macro">debug_assert!</span>(<span class="ident">m</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span> <span class="op">|</span><span class="op">|</span> <span class="ident">n</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">rsc</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
-    <span class="macro">debug_assert!</span>(<span class="ident">m</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">n</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span> <span class="op">|</span><span class="op">|</span> <span class="ident">csc</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
+    <span class="macro">debug_assert!</span>(<span class="ident">m</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span> <span class="op">|</span><span class="op">|</span> <span class="ident">n</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">rsc</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
+    <span class="macro">debug_assert!</span>(<span class="ident">m</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">n</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span> <span class="op">|</span><span class="op">|</span> <span class="ident">csc</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
 
     <span class="comment">// if A or B have no elements, compute C ← βC and return</span>
-    <span class="kw">if</span> <span class="ident">m</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">k</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">n</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">m</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">k</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">n</span> <span class="op">==</span> <span class="number">0</span> {
         <span class="kw">return</span> <span class="ident">c_to_beta_c</span>(<span class="ident">m</span>, <span class="ident">n</span>, <span class="ident">beta</span>, <span class="ident">c</span>, <span class="ident">rsc</span>, <span class="ident">csc</span>);
     }
 
@@ -642,7 +642,7 @@
                 <span class="ident">pack</span>::<span class="op">&lt;</span><span class="ident">K::MRTy</span>, <span class="kw">_</span><span class="op">&gt;</span>(<span class="ident">kc</span>, <span class="ident">mc</span>, <span class="ident">app</span>, <span class="ident">a</span>, <span class="ident">rsa</span>, <span class="ident">csa</span>);
 
                 <span class="comment">// First time writing to C, use user&#39;s `beta`, else accumulate</span>
-                <span class="kw">let</span> <span class="ident">betap</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">l4</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> { <span class="ident">beta</span> } <span class="kw">else</span> { <span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="ident">::one</span>() };
+                <span class="kw">let</span> <span class="ident">betap</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">l4</span> <span class="op">==</span> <span class="number">0</span> { <span class="ident">beta</span> } <span class="kw">else</span> { <span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="ident">::one</span>() };
 
                 <span class="comment">// LOOP 2 and 1</span>
                 <span class="ident">gemm_packed</span>::<span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>(<span class="ident">nc</span>, <span class="ident">kc</span>, <span class="ident">mc</span>,
@@ -709,7 +709,7 @@
 <span class="doccomment">/// we have rounded up to a multiple of the kernel size).</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Return packing buffer and offset to start of b</span>
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">make_packing_buffer</span><span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>(<span class="ident">m</span>: <span class="ident">usize</span>, <span class="ident">k</span>: <span class="ident">usize</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Alloc</span><span class="op">&lt;</span><span class="ident">K::Elem</span><span class="op">&gt;</span>, <span class="ident">usize</span>)
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">make_packing_buffer</span><span class="op">&lt;</span><span class="ident">K</span><span class="op">&gt;</span>(<span class="ident">m</span>: <span class="ident">usize</span>, <span class="ident">k</span>: <span class="ident">usize</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; (<span class="ident">Alloc</span><span class="op">&lt;</span><span class="ident">K::Elem</span><span class="op">&gt;</span>, <span class="ident">usize</span>)
     <span class="kw">where</span> <span class="ident">K</span>: <span class="ident">GemmKernel</span>,
 {
     <span class="comment">// max alignment requirement is a multiple of min(MR, NR) * sizeof&lt;Elem&gt;</span>
@@ -732,7 +732,7 @@
 }
 
 <span class="doccomment">/// offset the ptr forwards to align to a specific byte count</span>
-<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">align_ptr</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">align_to</span>: <span class="ident">usize</span>, <span class="kw-2">mut</span> <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">U</span> {
+<span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">align_ptr</span><span class="op">&lt;</span><span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">align_to</span>: <span class="ident">usize</span>, <span class="kw-2">mut</span> <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">U</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">U</span> {
     <span class="kw">if</span> <span class="ident">align_to</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
         <span class="kw">let</span> <span class="ident">cur_align</span> <span class="op">=</span> <span class="ident">ptr</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">%</span> <span class="ident">align_to</span>;
         <span class="kw">if</span> <span class="ident">cur_align</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
@@ -760,7 +760,7 @@
     <span class="kw">let</span> <span class="ident">mr</span> <span class="op">=</span> <span class="ident">MR::VALUE</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">p</span> <span class="op">=</span> <span class="number">0</span>; <span class="comment">// offset into pack</span>
 
-    <span class="kw">if</span> <span class="ident">rsa</span> <span class="op">=</span><span class="op">=</span> <span class="number">1</span> {
+    <span class="kw">if</span> <span class="ident">rsa</span> <span class="op">==</span> <span class="number">1</span> {
         <span class="comment">// if the matrix is contiguous in the same direction we are packing,</span>
         <span class="comment">// copy a kernel row at a time.</span>
         <span class="kw">for</span> <span class="ident">ir</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">mc</span><span class="op">/</span><span class="ident">mr</span> {

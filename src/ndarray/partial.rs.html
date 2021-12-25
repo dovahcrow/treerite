@@ -117,7 +117,7 @@
     <span class="doccomment">/// the `len` elements following it valid.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The Partial has an accessible length field which must only be modified in trusted code.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">ptr</span>,
             <span class="ident">len</span>: <span class="number">0</span>,
@@ -125,17 +125,17 @@
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rayon&quot;</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">stub</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">stub</span>() -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> { <span class="ident">len</span>: <span class="number">0</span>, <span class="ident">ptr</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span> }
     }
 
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rayon&quot;</span>)]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_stub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_stub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">is_null</span>()
     }
 
     <span class="doccomment">/// Release Partial&#39;s ownership of the written elements, and return the current length</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">release_ownership</span>(<span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">release_ownership</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>;
         <span class="self">self</span>.<span class="ident">len</span> <span class="op">=</span> <span class="number">0</span>;
         <span class="ident">ret</span>
@@ -144,7 +144,7 @@
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;rayon&quot;</span>)]</span>
     <span class="doccomment">/// Merge if they are in order (left to right) and contiguous.</span>
     <span class="doccomment">/// Skips merge if T does not need drop.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">try_merge</span>(<span class="kw-2">mut</span> <span class="ident">left</span>: <span class="self">Self</span>, <span class="ident">right</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">try_merge</span>(<span class="kw-2">mut</span> <span class="ident">left</span>: <span class="self">Self</span>, <span class="ident">right</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="ident">std::mem::needs_drop</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() {
             <span class="kw">return</span> <span class="ident">left</span>;
         }
@@ -152,7 +152,7 @@
         <span class="comment">// covers the whole output.</span>
         <span class="kw">if</span> <span class="ident">left</span>.<span class="ident">is_stub</span>() {
             <span class="ident">right</span>
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">left</span>.<span class="ident">ptr</span>.<span class="ident">wrapping_add</span>(<span class="ident">left</span>.<span class="ident">len</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">right</span>.<span class="ident">ptr</span> {
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">left</span>.<span class="ident">ptr</span>.<span class="ident">wrapping_add</span>(<span class="ident">left</span>.<span class="ident">len</span>) <span class="op">==</span> <span class="ident">right</span>.<span class="ident">ptr</span> {
             <span class="ident">left</span>.<span class="ident">len</span> <span class="op">+</span><span class="op">=</span> <span class="ident">right</span>.<span class="ident">release_ownership</span>();
             <span class="ident">left</span>
         } <span class="kw">else</span> {

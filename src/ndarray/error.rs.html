@@ -119,12 +119,12 @@
 <span class="kw">impl</span> <span class="ident">ShapeError</span> {
     <span class="doccomment">/// Return the `ErrorKind` of this error.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">kind</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ErrorKind</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">kind</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ErrorKind</span> {
         <span class="self">self</span>.<span class="ident">repr</span>
     }
 
     <span class="doccomment">/// Create a new `ShapeError`</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_kind</span>(<span class="ident">error</span>: <span class="ident">ErrorKind</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_kind</span>(<span class="ident">error</span>: <span class="ident">ErrorKind</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">from_kind</span>(<span class="ident">error</span>)
     }
 }
@@ -151,47 +151,47 @@
 }
 
 <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_kind</span>(<span class="ident">k</span>: <span class="ident">ErrorKind</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShapeError</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_kind</span>(<span class="ident">k</span>: <span class="ident">ErrorKind</span>) -&gt; <span class="ident">ShapeError</span> {
     <span class="ident">ShapeError</span> { <span class="ident">repr</span>: <span class="ident">k</span> }
 }
 
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">=</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">u8</span>
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">u8</span> <span class="op">==</span> <span class="kw-2">*</span><span class="ident">rhs</span> <span class="kw">as</span> <span class="ident">u8</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">PartialEq</span> <span class="kw">for</span> <span class="ident">ShapeError</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">repr</span> <span class="op">=</span><span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">repr</span>
+    <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">repr</span> <span class="op">==</span> <span class="ident">rhs</span>.<span class="ident">repr</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Error</span> <span class="kw">for</span> <span class="ident">ShapeError</span> {}
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">ShapeError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">let</span> <span class="ident">description</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">kind</span>() {
-            <span class="ident">ErrorKind::IncompatibleShape</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;incompatible shapes&quot;</span>,
-            <span class="ident">ErrorKind::IncompatibleLayout</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;incompatible memory layout&quot;</span>,
-            <span class="ident">ErrorKind::RangeLimited</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;the shape does not fit in type limits&quot;</span>,
-            <span class="ident">ErrorKind::OutOfBounds</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;out of bounds indexing&quot;</span>,
-            <span class="ident">ErrorKind::Unsupported</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;unsupported operation&quot;</span>,
-            <span class="ident">ErrorKind::Overflow</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;arithmetic overflow&quot;</span>,
+            <span class="ident">ErrorKind::IncompatibleShape</span> =&gt; <span class="string">&quot;incompatible shapes&quot;</span>,
+            <span class="ident">ErrorKind::IncompatibleLayout</span> =&gt; <span class="string">&quot;incompatible memory layout&quot;</span>,
+            <span class="ident">ErrorKind::RangeLimited</span> =&gt; <span class="string">&quot;the shape does not fit in type limits&quot;</span>,
+            <span class="ident">ErrorKind::OutOfBounds</span> =&gt; <span class="string">&quot;out of bounds indexing&quot;</span>,
+            <span class="ident">ErrorKind::Unsupported</span> =&gt; <span class="string">&quot;unsupported operation&quot;</span>,
+            <span class="ident">ErrorKind::Overflow</span> =&gt; <span class="string">&quot;arithmetic overflow&quot;</span>,
         };
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;ShapeError/{:?}: {}&quot;</span>, <span class="self">self</span>.<span class="ident">kind</span>(), <span class="ident">description</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">ShapeError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="self">self</span>)
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">incompatible_shapes</span><span class="op">&lt;</span><span class="ident">D</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="ident">_a</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">_b</span>: <span class="kw-2">&amp;</span><span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ShapeError</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">incompatible_shapes</span><span class="op">&lt;</span><span class="ident">D</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="ident">_a</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">_b</span>: <span class="kw-2">&amp;</span><span class="ident">E</span>) -&gt; <span class="ident">ShapeError</span>
 <span class="kw">where</span>
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
     <span class="ident">E</span>: <span class="ident">Dimension</span>,
