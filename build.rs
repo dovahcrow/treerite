@@ -16,6 +16,15 @@ fn build_lib() {
         println!("cargo:rustc-link-lib=stdc++");
         println!("cargo:rustc-link-lib=gomp");
     }
+    #[cfg(target_os = "macos")]
+    {
+        println!("cargo:rustc-link-lib=c++");
+        println!("cargo:rustc-link-lib=omp");
+    }
+    #[cfg(target_os = "windows")]
+    {
+        println!("cargo:rustc-link-lib=omp");
+    }
 }
 
 #[cfg(feature = "dynamic")]
