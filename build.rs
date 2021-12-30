@@ -10,22 +10,14 @@ fn build_lib() {
         .define("BUILD_STATIC_LIBS", "ON")
         .build();
     println!("cargo:rustc-link-search={}/lib", dst.display());
+    println!("cargo:rustc-link-lib=static=treelite_runtime_static");
     #[cfg(target_os = "linux")]
     {
-        println!("cargo:rustc-link-lib=static=treelite_runtime_static");
         println!("cargo:rustc-link-lib=stdc++");
-        println!("cargo:rustc-link-lib=gomp");
     }
     #[cfg(target_os = "macos")]
     {
-        println!("cargo:rustc-link-lib=static=treelite_runtime_static");
         println!("cargo:rustc-link-lib=c++");
-        println!("cargo:rustc-link-lib=omp");
-    }
-    #[cfg(target_os = "windows")]
-    {
-        println!("cargo:rustc-link-lib=static=treelite_runtime");
-        //println!("cargo:rustc-link-lib=omp");
     }
 }
 
