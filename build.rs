@@ -22,7 +22,7 @@ fn build_lib() {
         .define("CMAKE_INSTALL_LIBDIR", "lib")
         .build();
     println!("cargo:rustc-link-search={}/lib", dst.display());
-    println!("cargo:rustc-link-lib=dynamic=treelite_runtime");
+    println!("cargo:rustc-link-lib=dylib=treelite_runtime");
 }
 
 #[cfg(not(target_os = "windows"))]
