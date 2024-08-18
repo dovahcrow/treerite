@@ -1,23 +1,21 @@
 [package]
-authors = ["Weiyuan Wu <youngw@sfu.ca>"]
+authors = ["Weiyuan Wu <weiyuan@crows.land>"]
 description = "Rust binding for treelite runtime (https://github.com/dmlc/treelite)"
 edition = "2018"
 license-file = "LICENSE"
 name = "treerite"
 readme = "README.md"
 repository = "https://github.com/dovahcrow/treerite"
-version = "0.1.3"
+version = "0.2.0"
 
 [features]
-default = ["static", "free_panic"]
-dynamic = []
+default = ["free_panic"]
 free_panic = []
-static = []
 
 [dependencies]
-fehler = "1"
+culpa = "1"
 libc = "0.2"
-ndarray = "0.14"
+ndarray = "0.16"
 num-traits = "0.2"
 thiserror = "1"
 
@@ -25,7 +23,7 @@ thiserror = "1"
 cmake = "0.1"
 
 [dev-dependencies]
-criterion = "0.3"
+criterion = "0.5"
 
 [[bench]]
 harness = false

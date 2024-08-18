@@ -1,13 +1,14 @@
 # TreeRite: [TreeLite](https://github.com/dmlc/treelite) runtime in Rust ![CI](https://github.com/dovahcrow/treerite/workflows/CI/badge.svg)
 
-This binding currently works for treelite 1.0.0.
+This binding currently works for treelite 4.3.0.
 
 # Usage
 
-* Make sure your machine has cmake, libstdc++ and libgomp installed.
+* Make sure your machine has cmake, libstdc++, rapidjson, nlohmann-json and libgomp installed.
+* Use C++ 11 and set the env var `CXX=g++-11 CC=gcc-11`.
 * Add this to your project's `Cargo.toml`.
   ```toml
-  treerite = "0.1"
+  treerite = "0.2"
   ```
 
 By default, the treerite library is static linked to your binary. If you'd like to use the dynamic lib,
@@ -26,3 +27,4 @@ You can also take a look at the [tests](https://github.com/dovahcrow/treerite/te
 
 - [ ] TreeliteDMatrixCreateFromCSR
 - [ ] TreeliteDMatrixCreateFromFile
+

@@ -4,10 +4,10 @@ fn main() {
     build_lib();
 }
 
-#[cfg(feature = "static")]
 fn build_lib() {
     let dst = cmake::Config::new("treelite")
-        .define("BUILD_STATIC_LIBS", "ON")
+        .define("Treelite_BUILD_STATIC_LIBS", "ON")
+        .define("Treelite_USE_DYNAMIC_MSVC_RUNTIME", "ON")
         .build();
     println!("cargo:rustc-link-search={}/lib", dst.display());
     println!("cargo:rustc-link-lib=static=treelite_runtime_static");
@@ -19,13 +19,6 @@ fn build_lib() {
     {
         println!("cargo:rustc-link-lib=c++");
     }
-}
-
-#[cfg(feature = "dynamic")]
-fn build_lib() {
-    let dst = cmake::Config::new("treelite").build();
-    println!("cargo:rustc-link-search={}/lib", dst.display());
-    println!("cargo:rustc-link-lib=dynamic=treelite_runtime");
 }
 
 #[cfg(not(target_os = "windows"))]
