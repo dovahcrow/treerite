@@ -1,3 +1,3 @@
 [submodule "treelite"]
 	path = treelite
-	url = https://github.com/dmlc/treelite.git
+	url = git@github.com:dovahcrow/treelite.git
