@@ -5,7 +5,6 @@ This binding currently works for treelite 4.3.0.
 # Usage
 
 * Make sure your machine has cmake, libstdc++, rapidjson, nlohmann-json and libgomp installed.
-* Use C++ 11 and set the env var `CXX=g++-11 CC=gcc-11`.
 * Add this to your project's `Cargo.toml`.
   ```toml
   treerite = "0.2"

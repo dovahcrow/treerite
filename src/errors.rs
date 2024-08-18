@@ -1,4 +1,3 @@
-use crate::sys::DataType;
 use std::ffi::NulError;
 use thiserror::Error;
 
@@ -12,9 +11,6 @@ pub enum TreeRiteError {
 
     #[error(transparent)]
     NullError(#[from] NulError),
-
-    #[error("Wrong predict output type, expect: {0}")]
-    WrongPredictOutputType(DataType),
 
     #[error(transparent)]
     ShapeError(#[from] ndarray::ShapeError),

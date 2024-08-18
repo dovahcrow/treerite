@@ -21,6 +21,7 @@ thiserror = "1"
 
 [build-dependencies]
 cmake = "0.1"
+bindgen = "0.70"
 
 [dev-dependencies]
 criterion = "0.5"
