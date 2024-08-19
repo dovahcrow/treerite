@@ -28,6 +28,9 @@ use num_traits::Zero;
 #[repr(transparent)]
 pub struct Model(sys::TreeliteModelBuilderHandle);
 
+unsafe impl Send for Model {}
+unsafe impl Sync for Model {}
+
 impl Model {
     #[throws(TreeRiteError)]
     pub fn load_lightgbm<P>(filename: P, config: &str) -> Self
@@ -219,6 +222,9 @@ impl Drop for Model {
 #[repr(transparent)]
 pub struct GTIConfig(sys::TreeliteGTILConfigHandle);
 
+unsafe impl Send for GTIConfig {}
+unsafe impl Sync for GTIConfig {}
+
 impl GTIConfig {
     #[throws(TreeRiteError)]
     pub fn parse(config: &str) -> Self {
@@ -242,6 +248,9 @@ impl Drop for GTIConfig {
 
 #[repr(transparent)]
 pub struct Builder(sys::TreeliteModelBuilderHandle);
+
+unsafe impl Send for Builder {}
+unsafe impl Sync for Builder {}
 
 impl Builder {
     #[throws(TreeRiteError)]
