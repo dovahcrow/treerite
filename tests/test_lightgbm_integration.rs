@@ -15,7 +15,7 @@ fn test_lightgbm() {
     .unwrap();
     let model = Model::load_lightgbm_string(MODEL, "{}").unwrap();
     let input = array![[1., 49.], [2., 51.]];
-    let out = model.predict(&gti_config, &input).unwrap();
+    let out = model.predict(&gti_config, input.view()).unwrap();
     assert_eq!(
         array![0.3529530619710812, 0.6213271364915073],
         out.flatten()

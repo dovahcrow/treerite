@@ -22,7 +22,7 @@ use std::slice;
 use culpa::{throw, throws};
 use libc::{c_int, c_void};
 
-use ndarray::{Array, ArrayD, Dimension, IxDyn};
+use ndarray::{Array, ArrayD, ArrayView, Dimension, IxDyn};
 use num_traits::Zero;
 
 #[repr(transparent)]
@@ -184,7 +184,7 @@ impl Model {
     }
 
     #[throws(TreeRiteError)]
-    pub fn predict<A, D>(&self, config: &GTIConfig, input: &Array<A, D>) -> ArrayD<A>
+    pub fn predict<A, D>(&self, config: &GTIConfig, input: ArrayView<A, D>) -> ArrayD<A>
     where
         A: TypeName + Clone + Zero,
         D: Dimension,

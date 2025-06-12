@@ -4,7 +4,7 @@ This binding currently works for treelite 4.3.0.
 
 # Usage
 
-* Make sure your machine has cmake, libstdc++, rapidjson, nlohmann-json and libgomp installed.
+* Make sure your machine has cmake, libstdc++, rapidjson (optional), nlohmann-json (optional) and libgomp installed.
 * Add this to your project's `Cargo.toml`.
 
 ```toml
